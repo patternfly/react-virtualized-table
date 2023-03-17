@@ -10,6 +10,7 @@ module.exports = {
   transform: {
     '^.+\\.[jt]sx?$': 'babel-jest'
   },
+  transformIgnorePatterns: ['node_modules/(?!@patternfly)'],
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/styleMock.js'
   },

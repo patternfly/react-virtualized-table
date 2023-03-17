@@ -1,11 +1,15 @@
 {
   "name": "@patternfly/react-virtualized-extension",
-  "version": "1.0.0",
+  "version": "4.88.115",
   "description": "This library provides efficient rendering extensions for PatternFly React tables and lists.",
-  "main": "dist/esm/index.js",
+  "main": "dist/js/index.js",
   "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "sideEffects": false,
   "scripts": {
-    "build": "tsc --build --verbose ./tsconfig.json",
+    "build": "yarn build:esm && yarn build:cjs",
+    "build:cjs": "tsc --build --verbose ./tsconfig.cjs.json",
+    "build:esm": "tsc --build --verbose ./tsconfig.json",
     "build:fed:packages": "node generate-fed-package-json.js",
     "clean": "rimraf dist",
     "docs:develop": "pf-docs-framework start",
@@ -19,6 +23,12 @@
     "type": "git",
     "url": "https://github.com/patternfly/react-virtualized-extension"
   },
+  "keywords": [
+    "react",
+    "patternfly",
+    "table",
+    "reacttabular"
+  ],
   "author": "Red Hat",
   "license": "MIT",
   "bugs": {
@@ -26,10 +36,16 @@
   },
   "homepage": "https://github.com/patternfly/react-virtualized-extension#readme",
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "tag": "prerelease"
   },
   "dependencies": {
-    "@patternfly/react-core": "^4.276.6"
+    "@patternfly/react-core": "^4.276.8",
+    "@patternfly/react-icons": "^4.93.6",
+    "@patternfly/react-styles": "^4.92.6",
+    "linear-layout-vector": "0.0.1",
+    "react-virtualized": "^9.21.1",
+    "tslib": "^2.0.0"
   },
   "peerDependencies": {
     "react": "^16.8 || ^17 || ^18",

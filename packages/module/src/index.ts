@@ -1,1 +1,1 @@
-export * from './ExtendedButton';
+export * from './components';
