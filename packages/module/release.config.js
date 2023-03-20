@@ -1,5 +1,5 @@
 module.exports = {
-  branches: { name: 'main', channel: 'alpha', prerelease: 'alpha' },
+  branches: ['ga-release', { name: 'main', channel: 'alpha', prerelease: 'alpha' }],
   analyzeCommits: {
     preset: 'angular'
   },
