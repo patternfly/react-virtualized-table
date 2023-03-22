@@ -1,6 +1,6 @@
 {
   "name": "@patternfly/react-virtualized-extension",
-  "version": "4.88.115",
+  "version": "prerelease-v5.0.0-alpha.1",
   "description": "This library provides efficient rendering extensions for PatternFly React tables and lists.",
   "main": "dist/js/index.js",
   "module": "dist/esm/index.js",
@@ -37,7 +37,7 @@
   "homepage": "https://github.com/patternfly/react-virtualized-extension#readme",
   "publishConfig": {
     "access": "public",
-    "tag": "prerelease"
+    "tag": "alpha"
   },
   "dependencies": {
     "@patternfly/react-core": "^4.276.8",
