@@ -1,6 +1,12 @@
 import * as React from 'react';
 import { render } from '@testing-library/react';
-import { Table, TableHeader, sortable } from '@patternfly/react-table';
+import {
+	sortable
+} from '@patternfly/react-table';
+import {
+	Table as TableDeprecated,
+	TableHeader as TableHeaderDeprecated
+} from '@patternfly/react-table/deprecated';
 import { VirtualTableBody } from './index';
 import { rows, columns, actions } from '@patternfly/react-table/src/test-helpers/data-sets';
 import { CellMeasurerCache } from 'react-virtualized';
@@ -16,11 +22,11 @@ describe('Simple virtualized table', () => {
 
   test('className', () => {
     const { asFragment } = render(
-      <Table aria-label="Virtual Table Test" cells={columns} rows={rows}>
-        <TableHeader />
+      <TableDeprecated aria-label="Virtual Table Test" cells={columns} rows={rows}>
+        <TableHeaderDeprecated />
         {({ width }: { width: number }) => (
           <VirtualTableBody
-            className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
             deferredMeasurementCache={measurementCache}
             height={400}
             rowCount={rows.length}
@@ -30,15 +36,15 @@ describe('Simple virtualized table', () => {
             rowRenderer={rowRenderer}
           />
         )}
-      </Table>
+      </TableDeprecated>
     );
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('aria-label', () => {
     const { asFragment } = render(
-      <Table aria-label="Virtual Table Test" cells={columns} rows={rows}>
-        <TableHeader />
+      <TableDeprecated aria-label="Virtual Table Test" cells={columns} rows={rows}>
+        <TableHeaderDeprecated />
         {({ width }: { width: number }) => (
           <VirtualTableBody
             aria-label="Aria labeled"
@@ -50,7 +56,7 @@ describe('Simple virtualized table', () => {
             width={width}
           />
         )}
-      </Table>
+      </TableDeprecated>
     );
     expect(asFragment()).toMatchSnapshot();
   });
@@ -62,8 +68,8 @@ test('Sortable Virtualized Table', () => {
   const onSortCall = () => undefined as any;
   columns[0] = { ...(columns[0] as any), transforms: [sortable] };
   const { asFragment } = render(
-    <Table aria-label="Aria labeled" onSort={onSortCall} sortBy={{}} cells={columns} rows={rows}>
-      <TableHeader />
+    <TableDeprecated aria-label="Aria labeled" onSort={onSortCall} sortBy={{}} cells={columns} rows={rows}>
+      <TableHeaderDeprecated />
       {({ width }: { width: number }) => (
         <VirtualTableBody
           height={400}
@@ -74,7 +80,7 @@ test('Sortable Virtualized Table', () => {
           width={width}
         />
       )}
-    </Table>
+    </TableDeprecated>
   );
   expect(asFragment()).toMatchSnapshot();
 });
@@ -91,8 +97,8 @@ test('Simple Actions table', () => {
   ];
 
   const { asFragment } = render(
-    <Table aria-label="Aria labeled" actions={actions} cells={columns} rows={rowsWithDisabledAction}>
-      <TableHeader />
+    <TableDeprecated aria-label="Aria labeled" actions={actions} cells={columns} rows={rowsWithDisabledAction}>
+      <TableHeaderDeprecated />
       {({ width }: { width: number }) => (
         <VirtualTableBody
           rowHeight={measurementCache.rowHeight}
@@ -105,7 +111,7 @@ test('Simple Actions table', () => {
           width={width}
         />
       )}
-    </Table>
+    </TableDeprecated>
   );
   expect(asFragment()).toMatchSnapshot();
 });
@@ -114,14 +120,14 @@ test('Actions virtualized table', () => {
   const rowRenderer = () => {};
 
   const { asFragment } = render(
-    <Table
+    <TableDeprecated
       aria-label="Aria labeled"
       actionResolver={() => actions}
       areActionsDisabled={() => false}
       cells={columns}
       rows={rows}
     >
-      <TableHeader />
+      <TableHeaderDeprecated />
       {({ width }: { width: number }) => (
         <VirtualTableBody
           rowHeight={measurementCache.rowHeight}
@@ -134,7 +140,7 @@ test('Actions virtualized table', () => {
           width={width}
         />
       )}
-    </Table>
+    </TableDeprecated>
   );
   expect(asFragment()).toMatchSnapshot();
 });
@@ -144,8 +150,8 @@ test('Selectable virtualized table', () => {
 
   const onSelect = () => undefined as any;
   const { asFragment } = render(
-    <Table aria-label="Aria labeled" onSelect={onSelect} cells={columns} rows={rows}>
-      <TableHeader />
+    <TableDeprecated aria-label="Aria labeled" onSelect={onSelect} cells={columns} rows={rows}>
+      <TableHeaderDeprecated />
       {(width: number) => (
         <VirtualTableBody
           height={400}
@@ -156,7 +162,7 @@ test('Selectable virtualized table', () => {
           width={width}
         />
       )}
-    </Table>
+    </TableDeprecated>
   );
   expect(asFragment()).toMatchSnapshot();
 });

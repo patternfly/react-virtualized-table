@@ -2,7 +2,7 @@
   "name": "@patternfly/react-virtualized-extension-root",
   "private": true,
   "version": "0.0.0",
-  "description": "This library provides patternfly extensions",
+  "description": "This library provides PatternFly extensions",
   "license": "MIT",
   "workspaces": [
     "packages/*"
@@ -22,8 +22,8 @@
     "serve:a11y": "yarn workspace @patternfly/react-virtualized-extension serve:a11y"
   },
   "devDependencies": {
-    "react": "^17",
-    "react-dom": "^17",
+    "react": "^17.0.0 || ^18.0.0",
+    "react-dom": "^17.0.0 || ^18.0.0",
     "typescript": "^4.7.4",
     "@types/react": "^17.0.0",
     "@types/react-dom": "^17.0.0",

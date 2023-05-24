@@ -5,7 +5,6 @@
   "main": "dist/js/index.js",
   "module": "dist/esm/index.js",
   "types": "dist/esm/index.d.ts",
-  "sideEffects": false,
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
     "build:cjs": "tsc --build --verbose ./tsconfig.cjs.json",
@@ -40,22 +39,22 @@
     "tag": "alpha"
   },
   "dependencies": {
-    "@patternfly/react-core": "^4.276.8",
-    "@patternfly/react-icons": "^4.93.6",
-    "@patternfly/react-styles": "^4.92.6",
+    "@patternfly/react-core": "^5.0.0-alpha.116",
+    "@patternfly/react-icons": "^5.0.0-alpha.19",
+    "@patternfly/react-styles": "^5.0.0-alpha.16",
     "linear-layout-vector": "0.0.1",
     "react-virtualized": "^9.21.1",
     "tslib": "^2.0.0"
   },
   "peerDependencies": {
-    "react": "^16.8 || ^17 || ^18",
-    "react-dom": "^16.8 || ^17 || ^18"
+    "react": "^17 || ^18",
+    "react-dom": "^17 || ^18"
   },
   "devDependencies": {
-    "@patternfly/documentation-framework": "^1.10.1",
-    "@patternfly/patternfly": "^4.224.2",
-    "@patternfly/react-table": "^4.112.39",
-    "@patternfly/react-code-editor": "^4.82.113",
+    "@patternfly/documentation-framework": "^2.0.0-alpha.42",
+    "@patternfly/patternfly": "^5.0.0-alpha.64",
+    "@patternfly/react-table": "^5.0.0-alpha.119",
+    "@patternfly/react-code-editor": "^5.0.0-alpha.117",
     "rimraf": "^2.6.2",
     "@patternfly/patternfly-a11y": "^4.3.1",
     "react-monaco-editor": "^0.51.0"

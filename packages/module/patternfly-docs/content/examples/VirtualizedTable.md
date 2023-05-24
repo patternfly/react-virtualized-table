@@ -13,6 +13,16 @@ import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { CellMeasurerCache, CellMeasurer} from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
+import {
+  Dropdown,
+  DropdownItem,
+  DropdownPosition,
+  DropdownToggle,
+  Select,
+  SelectOption,
+  SelectVariant
+} from '@patternfly/react-core/deprecated';
 import './VirtualGrid.example.css';
 
 ## Examples
@@ -22,7 +32,8 @@ import './VirtualGrid.example.css';
 ```js
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
-import { Table, TableHeader, TableGridBreakpoint } from '@patternfly/react-table';
+import { TableGridBreakpoint } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -111,20 +122,20 @@ class VirtualizedExample extends React.Component {
     };
 
     return (
-      <div aria-label="Scrollable Table" className="pf-c-scrollablegrid">
-        <Table
+      <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+        <TableDeprecated
           caption="Simple Table"
           cells={columns}
           rows={rows}
           gridBreakPoint={TableGridBreakpoint.none}
           aria-rowcount={rows.length}
         >
-          <TableHeader />
-        </Table>
+          <TableHeaderDeprecated />
+        </TableDeprecated>
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
-              className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+              className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}
               height={400}
@@ -151,7 +162,7 @@ import React from 'react';
 import { debounce } from '@patternfly/react-core';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
-import { TableComposable, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 
 ComposableTableVirtualized = () => {
   const rows = [];
@@ -194,12 +205,12 @@ ComposableTableVirtualized = () => {
  );
 
   return (
-    <div aria-label="Scrollable Table" className="pf-c-scrollablegrid" >
-      <TableComposable gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
+    <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid" >
+      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
         <Caption>Virtualized table with composable table components</Caption>
         <Thead>
           <Tr>
-            <Th className="pf-c-table__check" />
+            <Th className="pf-v5-c-table__check" />
             {columns.map((col, index) => (
               <Th key={++index}>
                 {col}
@@ -207,11 +218,11 @@ ComposableTableVirtualized = () => {
             ))}
           </Tr>
         </Thead>
-      </TableComposable>
+      </Table>
       <AutoSizer disableHeight>
         {({ width }) => (
           <VirtualTableBody
-            className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
             deferredMeasurementCache={measurementCache}
             rowHeight={measurementCache.rowHeight}
             height={400}
@@ -235,7 +246,8 @@ ComposableTableVirtualized = () => {
 ```js
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
-import { Table, TableHeader, sortable, SortByDirection, TableGridBreakpoint } from '@patternfly/react-table';
+import { sortable, SortByDirection, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -346,8 +358,8 @@ class SortableExample extends React.Component {
     };
 
     return (
-      <div aria-label="Scrollable Table" className="pf-c-scrollablegrid">
-        <Table
+      <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+        <TableDeprecated
           caption="Sortable Virtualized Table"
           cells={columns}
           rows={rows}
@@ -357,13 +369,13 @@ class SortableExample extends React.Component {
           role="grid"
           aria-rowcount={rows.length}
         >
-          <TableHeader />
-        </Table>
+          <TableHeaderDeprecated />
+        </TableDeprecated>
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
               ref={ref => (this.sortableVirtualBody = ref)}
-              className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+              className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}
               height={400}
@@ -388,7 +400,8 @@ class SortableExample extends React.Component {
 ```js
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
-import { Table, TableHeader, headerCol, TableGridBreakpoint } from '@patternfly/react-table';
+import { headerCol, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -477,7 +490,7 @@ class SelectableExample extends React.Component {
       return (
         <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
           <tr data-id={index} style={style} role="row">
-            <td data-key="0" className="pf-c-table__check" role="gridcell">
+            <td data-key="0" className="pf-v5-c-table__check" role="gridcell">
               <input
                 type="checkbox"
                 aria-label={`Select row ${index}`}
@@ -505,8 +518,8 @@ class SelectableExample extends React.Component {
     };
 
     return (
-      <div aria-label="Scrollable Table" className="pf-c-scrollablegrid">
-        <Table
+      <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+        <TableDeprecated
           caption="Selectable Virtualized Table"
           cells={columns}
           rows={rows}
@@ -514,13 +527,13 @@ class SelectableExample extends React.Component {
           onSelect={this.onSelect}
           aria-rowcount={rows.length}
         >
-          <TableHeader />
-        </Table>
+          <TableHeaderDeprecated />
+        </TableDeprecated>
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
               ref={ref => (this.selectableVirtualBody = ref)}
-              className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+              className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}
               height={400}
@@ -545,7 +558,8 @@ class SelectableExample extends React.Component {
 ```js
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
-import { ActionsColumn, Table, TableHeader, TableGridBreakpoint } from '@patternfly/react-table';
+import { ActionsColumn, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -576,7 +590,7 @@ class ActionsExample extends React.Component {
         },
         { title: 'Status', props: { className: 'pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg' } },
         { title: 'Pod Selector', props: { className: 'pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-xl' } },
-        { title: '', props: { className: 'pf-c-table__action' } }
+        { title: '', props: { className: 'pf-v5-c-table__action' } }
       ],
       rows,
       actions: [
@@ -658,21 +672,21 @@ class ActionsExample extends React.Component {
     };
 
     return (
-      <div aria-label="Scrollable Table" className="pf-c-scrollablegrid">
-        <Table
+      <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+        <TableDeprecated
           caption="Actions Virtualized Table"
           cells={columns}
           rows={rows}
           gridBreakPoint={TableGridBreakpoint.none}
           aria-rowcount={rows.length}
         >
-          <TableHeader />
-        </Table>
+          <TableHeaderDeprecated />
+        </TableDeprecated>
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
               ref={ref => (this.actionsVirtualBody = ref)}
-              className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+              className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}
               height={400}
@@ -705,20 +719,23 @@ import {
   ToolbarFilter,
   ToolbarToggleGroup,
   ToolbarGroup,
-  Dropdown,
-  DropdownItem,
-  DropdownPosition,
-  DropdownToggle,
   InputGroup,
-  TextInput,
-  Select,
-  SelectOption,
-  SelectVariant,
+  TextInput
 } from '@patternfly/react-core';
 import { debounce } from '@patternfly/react-core';
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
-import { ActionsColumn, Table, TableHeader } from '@patternfly/react-table';
+import { ActionsColumn } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
+import { 
+  Dropdown,
+  DropdownItem,
+  DropdownPosition,
+  DropdownToggle,
+  Select,
+  SelectOption,
+  SelectVariant
+} from '@patternfly/react-core/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
 
@@ -1116,7 +1133,7 @@ class FilterExample extends React.Component {
         <div
           id="content-scrollable-1"
           aria-label="Scrollable Table"
-          className="pf-c-scrollablegrid"
+          className="pf-v5-c-scrollablegrid"
           style={{
             height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
             overflowX: 'auto',
@@ -1130,12 +1147,12 @@ class FilterExample extends React.Component {
             {!loading && filteredRows.length > 0 && (
               <div
                 aria-label="Scrollable Table"
-                className="pf-c-scrollablegrid"
+                className="pf-v5-c-scrollablegrid"
               >
-                <Table cells={columns} rows={filteredRows} actions={actions} aria-label="Filterable Table Demo"
+                <TableDeprecated cells={columns} rows={filteredRows} actions={actions} aria-label="Filterable Table Demo"
                        aria-rowcount={rows.length}>
-                  <TableHeader />
-                </Table>
+                  <TableHeaderDeprecated />
+                </TableDeprecated>
                 <WindowScroller scrollElement={scollableElement}>
                   {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
                     <AutoSizer disableHeight>
@@ -1144,7 +1161,7 @@ class FilterExample extends React.Component {
                           <VirtualTableBody
                             ref={ref => (this.actionsVirtualBody = ref)}
                             autoHeight
-                            className="pf-c-table pf-c-virtualized pf-c-window-scroller"
+                            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
                             deferredMeasurementCache={measurementCache}
                             rowHeight={measurementCache.rowHeight}
                             height={height || 0}
