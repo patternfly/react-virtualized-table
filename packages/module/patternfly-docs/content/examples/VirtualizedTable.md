@@ -8,7 +8,6 @@ propComponents: ['VirtualTableBody']
 
 Note: React Virtualized Extension lives in its own package at [`@patternfly/react-virtualized-extension`](https://www.npmjs.com/package/@patternfly/react-virtualized-extension)!
 
-
 import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { CellMeasurerCache, CellMeasurer} from 'react-virtualized';
