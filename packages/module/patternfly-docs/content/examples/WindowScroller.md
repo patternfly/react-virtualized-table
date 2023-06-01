@@ -14,6 +14,7 @@ This package is currently an extension. Extension components do not undergo the 
 
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import './VirtualGrid.example.css';
 import './WindowScroller.example.css';
 
@@ -24,7 +25,8 @@ import './WindowScroller.example.css';
 ```js
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
-import { Table, TableHeader, TableGridBreakpoint } from '@patternfly/react-table';
+import { TableGridBreakpoint } from '@patternfly/react-table';
+import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
 
@@ -134,7 +136,7 @@ class WindowScrollerExample extends React.Component {
       <div
         id="content-scrollable-1"
         aria-label="Scrollable Table"
-        className="pf-c-scrollablegrid"
+        className="pf-v5-c-scrollablegrid"
         style={{
           height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
           overflowX: 'auto',
@@ -145,15 +147,15 @@ class WindowScrollerExample extends React.Component {
         }}
       >
         <div style={{ padding: 15 }}>
-          <Table
+          <TableDeprecated
             caption="WindowScoller allows scrolling of a parent container or the window instead of tbody. It also can be used to dynamically size the table to the size of the scroll element."
             cells={columns}
             rows={rows}
             gridBreakPoint={TableGridBreakpoint.none}
             aria-rowcount={rows.length}
           >
-            <TableHeader />
-          </Table>
+            <TableHeaderDeprecated />
+          </TableDeprecated>
           {scrollableElement && <WindowScroller scrollElement={scrollableElement}>
             {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
               <AutoSizer disableHeight>
@@ -162,7 +164,7 @@ class WindowScrollerExample extends React.Component {
                     <VirtualTableBody
                       ref={this._bindBodyRef}
                       autoHeight
-                      className={'pf-c-virtualized pf-c-window-scroller'}
+                      className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
                       deferredMeasurementCache={this._cellMeasurementCache}
                       rowHeight={this._cellMeasurementCache.rowHeight}
                       height={height || 0}
@@ -197,7 +199,7 @@ class WindowScrollerExample extends React.Component {
 import React from 'react';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
-import { TableComposable, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 
 ComposableTableWindowScroller = () => {
   const [scrollableElement, setScrollableElement] = React.useState();
@@ -264,21 +266,21 @@ ComposableTableWindowScroller = () => {
     <div
       id="content-scrollable-2"
       aria-label="Scrollable Table"
-      className="pf-c-scrollablegrid"
+      className="pf-v5-c-scrollablegrid"
       style={scrollableContainerStyle}
     >
-      <TableComposable gridBreakPoint={TableGridBreakpoint.none}
+      <Table gridBreakPoint={TableGridBreakpoint.none}
                        aria-rowcount={rows.length}>
         <Caption>Virtualized table with composable table components</Caption>
         <Thead>
           <Tr>
-            <Th className="pf-c-table__check" />
+            <Th className="pf-v5-c-table__check" />
             {columns.map((col, index) => (
               <Th key={++index}>{col}</Th>
             ))}
           </Tr>
         </Thead>
-      </TableComposable>
+      </Table>
       <WindowScroller scrollElement={scrollableElement}>
         {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
           <AutoSizer disableHeight>
@@ -286,7 +288,7 @@ ComposableTableWindowScroller = () => {
               <div ref={registerChild}>
                 <VirtualTableBody
                   autoHeight
-                  className={'pf-c-virtualized pf-c-window-scroller'}
+                  className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
                   deferredMeasurementCache={measurementCache}
                   rowHeight={measurementCache.rowHeight}
                   height={height || 0}
