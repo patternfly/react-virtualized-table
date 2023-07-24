@@ -63,6 +63,7 @@ export class SortableExample extends React.Component {
 
   onSort(_event, index, direction) {
     const sortedRows = this.state.rows.sort((a, b) =>
+      // eslint-disable-next-line no-nested-ternary
       a.cells[index] < b.cells[index] ? -1 : a.cells[index] > b.cells[index] ? 1 : 0
     );
     this.setState({
@@ -85,7 +86,7 @@ export class SortableExample extends React.Component {
       keyMapper: (rowIndex) => rowIndex
     });
 
-    const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
+    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
       const { rows, columns } = this.state;
 
       return (

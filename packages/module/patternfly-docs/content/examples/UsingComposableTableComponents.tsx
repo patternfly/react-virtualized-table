@@ -9,7 +9,7 @@ export const ComposableTableVirtualized = () => {
   for (let i = 0; i < 100; i++) {
     rows.push([`one-${i}`, `two-${i}`, `three-${i}`, `four-${i}`, `five-${i}`]);
   }
-  const [selected, setSelected] = React.useState(rows.map((row) => false));
+  const [selected, setSelected] = React.useState(rows.map((_row) => false));
   const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
 
   const onSelect = (event, isSelected, rowId) => {
@@ -22,14 +22,14 @@ export const ComposableTableVirtualized = () => {
     keyMapper: (rowIndex) => rowIndex
   });
 
-  const rowRenderer = ({ index: rowIndex, isScrolling, key, style, parent }) => (
+  const rowRenderer = ({ index: rowIndex, _isScrolling, key, style, parent }) => (
     <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={rowIndex}>
       <Tr style={style}>
         <Td
           key={`${rowIndex}_0`}
           select={{
             rowIndex,
-            onSelect: onSelect,
+            onSelect,
             isSelected: selected[rowIndex]
           }}
         />

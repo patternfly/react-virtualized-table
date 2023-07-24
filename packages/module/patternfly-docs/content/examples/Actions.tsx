@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { debounce } from '@patternfly/react-core';
 import { ActionsColumn, TableGridBreakpoint } from '@patternfly/react-table';
@@ -38,18 +39,18 @@ export class ActionsExample extends React.Component {
       actions: [
         {
           title: 'Some action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Some action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Some action, on row: ', rowId)
         },
         {
           title: <div>Another action</div>,
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Another action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Another action, on row: ', rowId)
         },
         {
           isSeparator: true
         },
         {
           title: 'Third action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Third action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Third action, on row: ', rowId)
         }
       ]
     };
@@ -79,7 +80,7 @@ export class ActionsExample extends React.Component {
       keyMapper: (rowIndex) => rowIndex
     });
 
-    const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
+    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
       const { rows, columns, actions } = this.state;
 
       return (

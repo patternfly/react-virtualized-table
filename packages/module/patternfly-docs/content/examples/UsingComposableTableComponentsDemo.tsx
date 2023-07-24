@@ -19,7 +19,7 @@ export const ComposableTableWindowScroller = () => {
     }
     rows.push(cells);
   }
-  const [selected, setSelected] = React.useState(rows.map((row) => false));
+  const [selected, setSelected] = React.useState(rows.map((_row) => false));
   const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
   const scrollToIndex = -1; // can be used to programmatically set current index
 
@@ -33,7 +33,7 @@ export const ComposableTableWindowScroller = () => {
     keyMapper: (rowIndex) => rowIndex
   });
 
-  const rowRenderer = ({ index: rowIndex, isScrolling, key, style, parent }) => {
+  const rowRenderer = ({ index: rowIndex, _isScrolling, key, style, parent }) => {
     const text = rows[rowIndex][0];
 
     return (
@@ -43,7 +43,7 @@ export const ComposableTableWindowScroller = () => {
             key={`${rowIndex}_0`}
             select={{
               rowIndex,
-              onSelect: onSelect,
+              onSelect,
               isSelected: selected[rowIndex]
             }}
           />

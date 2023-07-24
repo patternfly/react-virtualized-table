@@ -80,7 +80,7 @@ export class WindowScrollerExample extends React.Component {
   render() {
     const { scrollToIndex, columns, rows, scrollableElement } = this.state;
 
-    const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
+    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
       const { rows, columns } = this.state;
       const text = rows[index].cells[0];
 

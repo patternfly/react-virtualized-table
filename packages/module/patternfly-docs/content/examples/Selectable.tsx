@@ -84,7 +84,7 @@ export class SelectableExample extends React.Component {
       keyMapper: (rowIndex) => rowIndex
     });
 
-    const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
+    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
       const { rows, columns } = this.state;
 
       return (

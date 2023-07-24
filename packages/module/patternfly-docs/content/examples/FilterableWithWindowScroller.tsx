@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import {
   Button,
@@ -73,18 +74,18 @@ export class FilterExample extends React.Component {
       actions: [
         {
           title: 'Some action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Some action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Some action, on row: ', rowId)
         },
         {
           title: <div>Another action</div>,
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Another action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Another action, on row: ', rowId)
         },
         {
           isSeparator: true
         },
         {
           title: 'Third action',
-          onClick: (event, rowId, rowData, extra) => console.log('clicked on Third action, on row: ', rowId)
+          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Third action, on row: ', rowId)
         }
       ]
     };
@@ -130,7 +131,7 @@ export class FilterExample extends React.Component {
       });
     };
 
-    this.onFilterSelect = (event) => {
+    this.onFilterSelect = (_event) => {
       this.setState({
         isFilterDropdownOpen: !this.state.isFilterDropdownOpen
       });
@@ -144,15 +145,13 @@ export class FilterExample extends React.Component {
           inputValue: newValue
         });
       } else {
-        this.setState((prevState) => {
-          return {
+        this.setState((prevState) => ({
             filters: {
               ...prevState.filters,
               ['name']: [newValue]
             },
             inputValue: newValue
-          };
-        });
+          }));
       }
     };
 
@@ -175,7 +174,7 @@ export class FilterExample extends React.Component {
     this.onStatusSelect = (event, selection) => {
       const checked = event.target.checked;
       this.setState((prevState) => {
-        const prevSelections = prevState.filters['status'];
+        const prevSelections = prevState.filters.status;
         return {
           filters: {
             ...prevState.filters,
@@ -192,7 +191,7 @@ export class FilterExample extends React.Component {
 
       const { inputValue } = this.state;
       this.setState((prevState) => {
-        const prevFilters = prevState.filters['name'];
+        const prevFilters = prevState.filters.name;
         return {
           filters: {
             ...prevState.filters,
@@ -204,14 +203,12 @@ export class FilterExample extends React.Component {
     };
 
     this.onLocationSelect = (event, selection) => {
-      this.setState((prevState) => {
-        return {
+      this.setState((prevState) => ({
           filters: {
             ...prevState.filters,
             ['location']: [selection]
           }
-        };
-      });
+        }));
       this.onFilterSelect();
     };
 
@@ -361,7 +358,6 @@ export class FilterExample extends React.Component {
   }
 
   renderToolbar() {
-    const { filters } = this.state;
     return (
       <Toolbar id="toolbar-with-chip-groups" clearAllFilters={this.onDelete} collapseListedFiltersBreakpoint="xl">
         <ToolbarContent>
@@ -381,14 +377,12 @@ export class FilterExample extends React.Component {
 
     const filteredRows =
       filters.name.length > 0 || filters.location.length > 0 || filters.status.length > 0
-        ? rows.filter((row) => {
-            return (
+        ? rows.filter((row) => (
               (filters.name.length === 0 ||
                 filters.name.some((name) => row.cells[0].toLowerCase().includes(name.toLowerCase()))) &&
               (filters.location.length === 0 || filters.location.includes(row.cells[4])) &&
               (filters.status.length === 0 || filters.status.includes(row.cells[3]))
-            );
-          })
+            ))
         : rows;
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
@@ -396,8 +390,8 @@ export class FilterExample extends React.Component {
       keyMapper: (rowIndex) => rowIndex
     });
 
-    const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
-      const { columns, actions } = this.state;
+    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
+      const { actions } = this.state;
 
       return (
         <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
@@ -450,7 +444,7 @@ export class FilterExample extends React.Component {
                   <TableHeaderDeprecated />
                 </TableDeprecated>
                 <WindowScroller scrollElement={scollableElement}>
-                  {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
+                  {({ height, _isScrolling, registerChild, _onChildScroll, scrollTop }) => (
                     <AutoSizer disableHeight>
                       {({ width }) => (
                         <div ref={registerChild}>
