@@ -18,13 +18,13 @@ import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { ActionsColumn } from '@patternfly/react-table';
 import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import {
-  Dropdown,
-  DropdownItem,
-  DropdownPosition,
-  DropdownToggle,
-  Select,
-  SelectOption,
-  SelectVariant
+  Dropdown as DropdownDeprecated,
+  DropdownItem as DropdownItemDeprecated,
+  DropdownPosition as DropdownPositionDeprecated,
+  DropdownToggle as DropdownToggleDeprecated,
+  Select as SelectDeprecated,
+  SelectOption as SelectOptionDeprecated,
+  SelectVariant as SelectVariantDeprecated
 } from '@patternfly/react-core/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
@@ -111,7 +111,7 @@ export class FilterExample extends React.Component {
       }
     };
 
-    this.onCategoryToggle = (isOpen) => {
+    this.onCategoryToggle = (_event, isOpen) => {
       this.setState({
         isCategoryDropdownOpen: isOpen
       });
@@ -124,7 +124,7 @@ export class FilterExample extends React.Component {
       });
     };
 
-    this.onFilterToggle = (isOpen) => {
+    this.onFilterToggle = (_event, isOpen) => {
       this.setState({
         isFilterDropdownOpen: isOpen
       });
@@ -136,7 +136,7 @@ export class FilterExample extends React.Component {
       });
     };
 
-    this.onInputChange = (newValue) => {
+    this.onInputChange = (_event, newValue) => {
       // this.setState({ inputValue: newValue });
       if (newValue === '') {
         this.onDelete();
@@ -250,22 +250,22 @@ export class FilterExample extends React.Component {
 
     return (
       <ToolbarItem>
-        <Dropdown
+        <DropdownDeprecated
           onSelect={this.onCategorySelect}
-          position={DropdownPosition.left}
+          position={DropdownPositionDeprecated.left}
           toggle={
-            <DropdownToggle onToggle={this.onCategoryToggle} style={{ width: '100%' }}>
+            <DropdownToggleDeprecated onToggle={this.onCategoryToggle} style={{ width: '100%' }}>
               <FilterIcon /> {currentCategory}
-            </DropdownToggle>
+            </DropdownToggleDeprecated>
           }
           isOpen={isCategoryDropdownOpen}
           dropdownItems={[
-            <DropdownItem key="cat1">Location</DropdownItem>,
-            <DropdownItem key="cat2">Name</DropdownItem>,
-            <DropdownItem key="cat3">Status</DropdownItem>
+            <DropdownItemDeprecated key="cat1">Location</DropdownItemDeprecated>,
+            <DropdownItemDeprecated key="cat2">Name</DropdownItemDeprecated>,
+            <DropdownItemDeprecated key="cat3">Status</DropdownItemDeprecated>
           ]}
           style={{ width: '100%' }}
-        ></Dropdown>
+        ></DropdownDeprecated>
       </ToolbarItem>
     );
   }
@@ -274,19 +274,19 @@ export class FilterExample extends React.Component {
     const { currentCategory, isFilterDropdownOpen, inputValue, filters } = this.state;
 
     const locationMenuItems = [
-      <SelectOption key="raleigh" value="Raleigh" />,
-      <SelectOption key="westford" value="Westford" />,
-      <SelectOption key="boston" value="Boston" />,
-      <SelectOption key="brno" value="Brno" />,
-      <SelectOption key="bangalore" value="Bangalore" />
+      <SelectOptionDeprecated key="raleigh" value="Raleigh" />,
+      <SelectOptionDeprecated key="westford" value="Westford" />,
+      <SelectOptionDeprecated key="boston" value="Boston" />,
+      <SelectOptionDeprecated key="brno" value="Brno" />,
+      <SelectOptionDeprecated key="bangalore" value="Bangalore" />
     ];
 
     const statusMenuItems = [
-      <SelectOption key="statusRunning" value="Running" />,
-      <SelectOption key="statusStopped" value="Stopped" />,
-      <SelectOption key="statusDown" value="Down" />,
-      <SelectOption key="statusDegraded" value="Degraded" />,
-      <SelectOption key="statusMaint" value="Needs Maintainence" />
+      <SelectOptionDeprecated key="statusRunning" value="Running" />,
+      <SelectOptionDeprecated key="statusStopped" value="Stopped" />,
+      <SelectOptionDeprecated key="statusDown" value="Down" />,
+      <SelectOptionDeprecated key="statusDegraded" value="Degraded" />,
+      <SelectOptionDeprecated key="statusMaint" value="Needs Maintainence" />
     ];
 
     return (
@@ -297,7 +297,7 @@ export class FilterExample extends React.Component {
           categoryName="Location"
           showToolbarItem={currentCategory === 'Location'}
         >
-          <Select
+          <SelectDeprecated
             aria-label="Location"
             onToggle={this.onFilterToggle}
             onSelect={this.onLocationSelect}
@@ -306,7 +306,7 @@ export class FilterExample extends React.Component {
             placeholderText="Any"
           >
             {locationMenuItems}
-          </Select>
+          </SelectDeprecated>
         </ToolbarFilter>
         <ToolbarFilter
           chips={filters.name}
@@ -344,8 +344,8 @@ export class FilterExample extends React.Component {
           categoryName="Status"
           showToolbarItem={currentCategory === 'Status'}
         >
-          <Select
-            variant={SelectVariant.checkbox}
+          <SelectDeprecated
+            variant={SelectVariantDeprecated.checkbox}
             aria-label="Status"
             onToggle={this.onFilterToggle}
             onSelect={this.onStatusSelect}
@@ -354,7 +354,7 @@ export class FilterExample extends React.Component {
             placeholderText="Filter by status"
           >
             {statusMenuItems}
-          </Select>
+          </SelectDeprecated>
         </ToolbarFilter>
       </React.Fragment>
     );
