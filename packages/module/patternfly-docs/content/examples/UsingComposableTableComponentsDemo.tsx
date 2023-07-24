@@ -89,7 +89,7 @@ export const ComposableTableWindowScroller = () => {
               <div ref={registerChild}>
                 <VirtualTableBody
                   autoHeight
-                  className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
+                  className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
                   deferredMeasurementCache={measurementCache}
                   rowHeight={measurementCache.rowHeight}
                   height={height || 0}
