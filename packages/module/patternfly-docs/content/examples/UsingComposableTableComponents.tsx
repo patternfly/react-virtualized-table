@@ -1,8 +1,16 @@
 import React from 'react';
-import { debounce } from '@patternfly/react-core';
+
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
-import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
+import {
+  Table,
+	Thead,
+	Tr,
+	Th,
+	Td,
+	Caption,
+	TableGridBreakpoint
+} from '@patternfly/react-table';
 
 export const ComposableTableVirtualized = () => {
   const rows = [];

@@ -1,7 +1,15 @@
 import React from 'react';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
-import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
+import {
+  Table,
+	Thead,
+	Tr,
+	Th,
+	Td,
+	Caption,
+	TableGridBreakpoint
+} from '@patternfly/react-table';
 
 export const ComposableTableWindowScroller = () => {
   const [scrollableElement, setScrollableElement] = React.useState();

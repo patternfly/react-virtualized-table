@@ -9,6 +9,7 @@ import {
   ToolbarToggleGroup,
   ToolbarGroup,
   InputGroup,
+  InputGroupItem,
   TextInput
 } from '@patternfly/react-core';
 import { debounce } from '@patternfly/react-core';
@@ -314,7 +315,7 @@ export class FilterExample extends React.Component {
           showToolbarItem={currentCategory === 'Name'}
         >
           <InputGroup>
-            <TextInput
+            <InputGroupItem isFill ><TextInput
               name="nameInput"
               id="nameInput1"
               type="search"
@@ -323,14 +324,14 @@ export class FilterExample extends React.Component {
               value={inputValue}
               placeholder="Filter by name..."
               // onKeyDown={this.onNameInput}
-            />
-            <Button
+            /></InputGroupItem>
+            <InputGroupItem><Button
               variant={ButtonVariant.control}
               aria-label="search button for search input"
               // onClick={this.onNameInput}
             >
               <SearchIcon />
-            </Button>
+            </Button></InputGroupItem>
           </InputGroup>
         </ToolbarFilter>
         <ToolbarFilter
