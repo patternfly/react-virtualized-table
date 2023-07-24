@@ -76,7 +76,7 @@ export class ActionsExample extends React.Component {
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
       minHeight: 44,
-      keyMapper: rowIndex => rowIndex
+      keyMapper: (rowIndex) => rowIndex
     });
 
     const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
@@ -127,7 +127,7 @@ export class ActionsExample extends React.Component {
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
-              ref={ref => (this.actionsVirtualBody = ref)}
+              ref={(ref) => (this.actionsVirtualBody = ref)}
               className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}

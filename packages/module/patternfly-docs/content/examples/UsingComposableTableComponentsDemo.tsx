@@ -1,15 +1,7 @@
 import React from 'react';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
-import {
-  Table,
-	Thead,
-	Tr,
-	Th,
-	Td,
-	Caption,
-	TableGridBreakpoint
-} from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 
 export const ComposableTableWindowScroller = () => {
   const [scrollableElement, setScrollableElement] = React.useState();
@@ -27,7 +19,7 @@ export const ComposableTableWindowScroller = () => {
     }
     rows.push(cells);
   }
-  const [selected, setSelected] = React.useState(rows.map(row => false));
+  const [selected, setSelected] = React.useState(rows.map((row) => false));
   const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
   const scrollToIndex = -1; // can be used to programmatically set current index
 
@@ -38,7 +30,7 @@ export const ComposableTableWindowScroller = () => {
   const measurementCache = new CellMeasurerCache({
     fixedWidth: true,
     minHeight: 44,
-    keyMapper: rowIndex => rowIndex
+    keyMapper: (rowIndex) => rowIndex
   });
 
   const rowRenderer = ({ index: rowIndex, isScrolling, key, style, parent }) => {
@@ -79,8 +71,7 @@ export const ComposableTableWindowScroller = () => {
       className="pf-v5-c-scrollablegrid"
       style={scrollableContainerStyle}
     >
-      <Table gridBreakPoint={TableGridBreakpoint.none}
-                       aria-rowcount={rows.length}>
+      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
         <Caption>Virtualized table with composable table components</Caption>
         <Thead>
           <Tr>

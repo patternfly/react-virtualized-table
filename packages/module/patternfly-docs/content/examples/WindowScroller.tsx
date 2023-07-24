@@ -24,7 +24,7 @@ export class WindowScrollerExample extends React.Component {
       this._cellMeasurementCache = new CellMeasurerCache({
         fixedWidth: true,
         minHeight: 44,
-        keyMapper: rowIndex => rowIndex
+        keyMapper: (rowIndex) => rowIndex
       });
     }
 
@@ -131,36 +131,38 @@ export class WindowScrollerExample extends React.Component {
           >
             <TableHeaderDeprecated />
           </TableDeprecated>
-          {scrollableElement && <WindowScroller scrollElement={scrollableElement}>
-            {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
-              <AutoSizer disableHeight>
-                {({ width }) => (
-                  <div ref={registerChild}>
-                    <VirtualTableBody
-                      ref={this._bindBodyRef}
-                      autoHeight
-                      className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
-                      deferredMeasurementCache={this._cellMeasurementCache}
-                      rowHeight={this._cellMeasurementCache.rowHeight}
-                      height={height || 0}
-                      isScrolling={isScrolling}
-                      isScrollingOptOut={true}
-                      onScroll={onChildScroll}
-                      overscanRowCount={2}
-                      columnCount={1}
-                      rows={rows}
-                      rowCount={rows.length}
-                      rowRenderer={rowRenderer}
-                      scrollToIndex={scrollToIndex}
-                      scrollTop={scrollTop}
-                      width={width}
-                      role="grid"
-                    />
-                  </div>
-                )}
-              </AutoSizer>
-            )}
-          </WindowScroller>}
+          {scrollableElement && (
+            <WindowScroller scrollElement={scrollableElement}>
+              {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
+                <AutoSizer disableHeight>
+                  {({ width }) => (
+                    <div ref={registerChild}>
+                      <VirtualTableBody
+                        ref={this._bindBodyRef}
+                        autoHeight
+                        className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
+                        deferredMeasurementCache={this._cellMeasurementCache}
+                        rowHeight={this._cellMeasurementCache.rowHeight}
+                        height={height || 0}
+                        isScrolling={isScrolling}
+                        isScrollingOptOut={true}
+                        onScroll={onChildScroll}
+                        overscanRowCount={2}
+                        columnCount={1}
+                        rows={rows}
+                        rowCount={rows.length}
+                        rowRenderer={rowRenderer}
+                        scrollToIndex={scrollToIndex}
+                        scrollTop={scrollTop}
+                        width={width}
+                        role="grid"
+                      />
+                    </div>
+                  )}
+                </AutoSizer>
+              )}
+            </WindowScroller>
+          )}
         </div>
       </div>
     );

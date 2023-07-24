@@ -60,7 +60,7 @@ export class VirtualizedExample extends React.Component {
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
       minHeight: 44,
-      keyMapper: rowIndex => rowIndex
+      keyMapper: (rowIndex) => rowIndex
     });
 
     const rowRenderer = ({ index, isScrolling, key, style, parent }) => {

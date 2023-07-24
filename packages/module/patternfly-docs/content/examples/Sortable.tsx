@@ -82,7 +82,7 @@ export class SortableExample extends React.Component {
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
       minHeight: 44,
-      keyMapper: rowIndex => rowIndex
+      keyMapper: (rowIndex) => rowIndex
     });
 
     const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
@@ -128,7 +128,7 @@ export class SortableExample extends React.Component {
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
-              ref={ref => (this.sortableVirtualBody = ref)}
+              ref={(ref) => (this.sortableVirtualBody = ref)}
               className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}

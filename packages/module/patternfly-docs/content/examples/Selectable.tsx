@@ -60,13 +60,13 @@ export class SelectableExample extends React.Component {
   onSelect(event, isSelected, virtualRowIndex, rowData) {
     let rows;
     if (virtualRowIndex === -1) {
-      rows = this.state.rows.map(oneRow => {
+      rows = this.state.rows.map((oneRow) => {
         oneRow.selected = isSelected;
         return oneRow;
       });
     } else {
       rows = [...this.state.rows];
-      const rowIndex = rows.findIndex(r => r.id === rowData.id);
+      const rowIndex = rows.findIndex((r) => r.id === rowData.id);
       rows[rowIndex] = { ...rows[rowIndex], selected: isSelected };
     }
     this.setState({
@@ -81,7 +81,7 @@ export class SelectableExample extends React.Component {
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
       minHeight: 44,
-      keyMapper: rowIndex => rowIndex
+      keyMapper: (rowIndex) => rowIndex
     });
 
     const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
@@ -95,7 +95,7 @@ export class SelectableExample extends React.Component {
                 type="checkbox"
                 aria-label={`Select row ${index}`}
                 checked={rows[index].selected}
-                onChange={e => {
+                onChange={(e) => {
                   this.onSelect(e, e.target.checked, 0, { id: rows[index].id });
                 }}
               />
@@ -132,7 +132,7 @@ export class SelectableExample extends React.Component {
         <AutoSizer disableHeight>
           {({ width }) => (
             <VirtualTableBody
-              ref={ref => (this.selectableVirtualBody = ref)}
+              ref={(ref) => (this.selectableVirtualBody = ref)}
               className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
               deferredMeasurementCache={measurementCache}
               rowHeight={measurementCache.rowHeight}

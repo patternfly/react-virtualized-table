@@ -17,7 +17,7 @@ import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
 import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { ActionsColumn } from '@patternfly/react-table';
 import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
-import { 
+import {
   Dropdown,
   DropdownItem,
   DropdownPosition,
@@ -93,8 +93,8 @@ export class FilterExample extends React.Component {
 
     this.onDelete = (type = '', id = '') => {
       if (type) {
-        this.setState(prevState => {
-          prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter(s => s !== id);
+        this.setState((prevState) => {
+          prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter((s) => s !== id);
           return {
             filters: prevState.filters
           };
@@ -111,32 +111,32 @@ export class FilterExample extends React.Component {
       }
     };
 
-    this.onCategoryToggle = isOpen => {
+    this.onCategoryToggle = (isOpen) => {
       this.setState({
         isCategoryDropdownOpen: isOpen
       });
     };
 
-    this.onCategorySelect = event => {
+    this.onCategorySelect = (event) => {
       this.setState({
         currentCategory: event.target.innerText,
         isCategoryDropdownOpen: !this.state.isCategoryDropdownOpen
       });
     };
 
-    this.onFilterToggle = isOpen => {
+    this.onFilterToggle = (isOpen) => {
       this.setState({
         isFilterDropdownOpen: isOpen
       });
     };
 
-    this.onFilterSelect = event => {
+    this.onFilterSelect = (event) => {
       this.setState({
         isFilterDropdownOpen: !this.state.isFilterDropdownOpen
       });
     };
 
-    this.onInputChange = newValue => {
+    this.onInputChange = (newValue) => {
       // this.setState({ inputValue: newValue });
       if (newValue === '') {
         this.onDelete();
@@ -144,7 +144,7 @@ export class FilterExample extends React.Component {
           inputValue: newValue
         });
       } else {
-        this.setState(prevState => {
+        this.setState((prevState) => {
           return {
             filters: {
               ...prevState.filters,
@@ -159,7 +159,7 @@ export class FilterExample extends React.Component {
     this.onRowSelect = (event, isSelected, rowId) => {
       let rows;
       if (rowId === -1) {
-        rows = this.state.rows.map(oneRow => {
+        rows = this.state.rows.map((oneRow) => {
           oneRow.selected = isSelected;
           return oneRow;
         });
@@ -174,24 +174,24 @@ export class FilterExample extends React.Component {
 
     this.onStatusSelect = (event, selection) => {
       const checked = event.target.checked;
-      this.setState(prevState => {
+      this.setState((prevState) => {
         const prevSelections = prevState.filters['status'];
         return {
           filters: {
             ...prevState.filters,
-            status: checked ? [...prevSelections, selection] : prevSelections.filter(value => value !== selection)
+            status: checked ? [...prevSelections, selection] : prevSelections.filter((value) => value !== selection)
           }
         };
       });
     };
 
-    this.onNameInput = event => {
+    this.onNameInput = (event) => {
       if (event.key && event.key !== 'Enter') {
         return;
       }
 
       const { inputValue } = this.state;
-      this.setState(prevState => {
+      this.setState((prevState) => {
         const prevFilters = prevState.filters['name'];
         return {
           filters: {
@@ -204,7 +204,7 @@ export class FilterExample extends React.Component {
     };
 
     this.onLocationSelect = (event, selection) => {
-      this.setState(prevState => {
+      this.setState((prevState) => {
         return {
           filters: {
             ...prevState.filters,
@@ -315,23 +315,27 @@ export class FilterExample extends React.Component {
           showToolbarItem={currentCategory === 'Name'}
         >
           <InputGroup>
-            <InputGroupItem isFill ><TextInput
-              name="nameInput"
-              id="nameInput1"
-              type="search"
-              aria-label="name filter"
-              onChange={this.onInputChange}
-              value={inputValue}
-              placeholder="Filter by name..."
-              // onKeyDown={this.onNameInput}
-            /></InputGroupItem>
-            <InputGroupItem><Button
-              variant={ButtonVariant.control}
-              aria-label="search button for search input"
-              // onClick={this.onNameInput}
-            >
-              <SearchIcon />
-            </Button></InputGroupItem>
+            <InputGroupItem isFill>
+              <TextInput
+                name="nameInput"
+                id="nameInput1"
+                type="search"
+                aria-label="name filter"
+                onChange={this.onInputChange}
+                value={inputValue}
+                placeholder="Filter by name..."
+                // onKeyDown={this.onNameInput}
+              />
+            </InputGroupItem>
+            <InputGroupItem>
+              <Button
+                variant={ButtonVariant.control}
+                aria-label="search button for search input"
+                // onClick={this.onNameInput}
+              >
+                <SearchIcon />
+              </Button>
+            </InputGroupItem>
           </InputGroup>
         </ToolbarFilter>
         <ToolbarFilter
@@ -377,19 +381,19 @@ export class FilterExample extends React.Component {
 
     const filteredRows =
       filters.name.length > 0 || filters.location.length > 0 || filters.status.length > 0
-        ? rows.filter(row => {
-          return (
-            (filters.name.length === 0 ||
-              filters.name.some(name => row.cells[0].toLowerCase().includes(name.toLowerCase()))) &&
-            (filters.location.length === 0 || filters.location.includes(row.cells[4])) &&
-            (filters.status.length === 0 || filters.status.includes(row.cells[3]))
-          );
-        })
+        ? rows.filter((row) => {
+            return (
+              (filters.name.length === 0 ||
+                filters.name.some((name) => row.cells[0].toLowerCase().includes(name.toLowerCase()))) &&
+              (filters.location.length === 0 || filters.location.includes(row.cells[4])) &&
+              (filters.status.length === 0 || filters.status.includes(row.cells[3]))
+            );
+          })
         : rows;
     const measurementCache = new CellMeasurerCache({
       fixedWidth: true,
       minHeight: 44,
-      keyMapper: rowIndex => rowIndex
+      keyMapper: (rowIndex) => rowIndex
     });
 
     const rowRenderer = ({ index, isScrolling, key, style, parent }) => {
@@ -435,12 +439,14 @@ export class FilterExample extends React.Component {
         >
           <div style={{ padding: 15 }}>
             {!loading && filteredRows.length > 0 && (
-              <div
-                aria-label="Scrollable Table"
-                className="pf-v5-c-scrollablegrid"
-              >
-                <TableDeprecated cells={columns} rows={filteredRows} actions={actions} aria-label="Filterable Table Demo"
-                       aria-rowcount={rows.length}>
+              <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+                <TableDeprecated
+                  cells={columns}
+                  rows={filteredRows}
+                  actions={actions}
+                  aria-label="Filterable Table Demo"
+                  aria-rowcount={rows.length}
+                >
                   <TableHeaderDeprecated />
                 </TableDeprecated>
                 <WindowScroller scrollElement={scollableElement}>
@@ -449,7 +455,7 @@ export class FilterExample extends React.Component {
                       {({ width }) => (
                         <div ref={registerChild}>
                           <VirtualTableBody
-                            ref={ref => (this.actionsVirtualBody = ref)}
+                            ref={(ref) => (this.actionsVirtualBody = ref)}
                             autoHeight
                             className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
                             deferredMeasurementCache={measurementCache}
