@@ -31,7 +31,7 @@ import './VirtualGrid.example.css';
 ```js file="./Basic.tsx"
 ```
 
-### Using composable table components
+### With composable table components
 
 ```js file="./UsingComposableTableComponents.tsx"
 ```

@@ -69,8 +69,8 @@ export class WindowScrollerExample extends React.Component {
   }
 
   _handleResize() {
-    this._cellMeasurementCache.clearAll();
-    this._bodyRef.recomputeVirtualGridSize();
+    // this._cellMeasurementCache.clearAll();
+    // this._bodyRef.recomputeVirtualGridSize();
   }
 
   _bindBodyRef(ref) {

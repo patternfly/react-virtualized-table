@@ -1,7 +1,6 @@
 import React from 'react';
-import { debounce } from '@patternfly/react-core';
-import { TableGridBreakpoint } from '@patternfly/react-table';
-import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
+import { Divider, Panel, PanelHeader, PanelMain, PanelMainBody, debounce } from '@patternfly/react-core';
+import { Caption, Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -90,34 +89,50 @@ export class VirtualizedExample extends React.Component {
     };
 
     return (
-      <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
-        <TableDeprecated
-          caption="Simple Table"
-          cells={columns}
-          rows={rows}
-          gridBreakPoint={TableGridBreakpoint.none}
-          aria-rowcount={rows.length}
-        >
-          <TableHeaderDeprecated />
-        </TableDeprecated>
-        <AutoSizer disableHeight>
-          {({ width }) => (
-            <VirtualTableBody
-              className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
-              deferredMeasurementCache={measurementCache}
-              rowHeight={measurementCache.rowHeight}
-              height={400}
-              overscanRowCount={2}
-              columnCount={1}
-              rows={rows}
-              rowCount={rows.length}
-              rowRenderer={rowRenderer}
-              width={width}
-              role="grid"
-            />
-          )}
-        </AutoSizer>
-      </div>
+      <Panel isScrollable>
+        <PanelHeader>Simple Table</PanelHeader>
+        <PanelMain tabIndex={0}>
+            <Table isStickyHeader aria-label="Simple Table" aria-rowcount={rows.length} variant="compact">
+              <Thead>
+                <Tr>
+                  <Th>{columns[0].title}</Th>
+                  <Th>{columns[1].title}</Th>
+                  <Th>{columns[2].title}</Th>
+                  <Th>{columns[3].title}</Th>
+                  <Th>{columns[4].title}</Th>
+                </Tr>
+              </Thead>
+              <Tbody>
+                {rows.map((row) => (
+                  <Tr key={row.name}>
+                    <Td dataLabel={columns[0].title}>{row.cells[0]}</Td>
+                    <Td dataLabel={columns[1].title}>{row.cells[1]}</Td>
+                    <Td dataLabel={columns[2].title}>{row.cells[2]}</Td>
+                    <Td dataLabel={columns[3].title}>{row.cells[3]}</Td>
+                    <Td dataLabel={columns[4].title}>{row.cells[4]}</Td>
+                  </Tr>
+                ))}
+              </Tbody>
+            </Table>
+            <AutoSizer disableHeight>
+              {({ width }) => (
+                <VirtualTableBody
+                  className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
+                  deferredMeasurementCache={measurementCache}
+                  rowHeight={measurementCache.rowHeight}
+                  height={400}
+                  overscanRowCount={2}
+                  columnCount={1}
+                  rows={rows}
+                  rowCount={rows.length}
+                  rowRenderer={rowRenderer}
+                  width={width}
+                  role="grid"
+                />
+              )}
+            </AutoSizer>
+        </PanelMain>
+      </Panel>
     );
   }
 }

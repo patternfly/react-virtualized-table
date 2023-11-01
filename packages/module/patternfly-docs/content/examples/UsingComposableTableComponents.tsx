@@ -2,7 +2,8 @@ import React from 'react';
 
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
-import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint, Tbody } from '@patternfly/react-table';
+import { Panel, PanelHeader, PanelMain } from '@patternfly/react-core';
 
 export const ComposableTableVirtualized = () => {
   const rows = [];
@@ -41,35 +42,62 @@ export const ComposableTableVirtualized = () => {
   );
 
   return (
-    <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
-      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
-        <Caption>Virtualized table with composable table components</Caption>
-        <Thead>
-          <Tr>
-            <Th className="pf-v5-c-table__check" />
-            {columns.map((col, index) => (
-              <Th key={++index}>{col}</Th>
+    <Panel isScrollable>
+      <PanelHeader>Virtualized table with composable table components</PanelHeader>
+      <PanelMain tabIndex={0}>
+        <Table isStickyHeader aria-label="Simple Table" aria-rowcount={rows.length} variant="compact">
+          <Thead>
+            <Tr>
+              <Th>{columns[0]}</Th>
+              <Th>{columns[1]}</Th>
+              <Th>{columns[2]}</Th>
+              <Th>{columns[3]}</Th>
+              <Th>{columns[4]}</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {rows.map((row) => (
+              <Tr key={row}>
+                <Td dataLabel={columns[0]}>{row[0]}</Td>
+                <Td dataLabel={columns[1]}>{row[1]}</Td>
+                <Td dataLabel={columns[2]}>{row[2]}</Td>
+                <Td dataLabel={columns[3]}>{row[3]}</Td>
+                <Td dataLabel={columns[4]}>{row[4]}</Td>
+              </Tr>
             ))}
-          </Tr>
-        </Thead>
-      </Table>
-      <AutoSizer disableHeight>
-        {({ width }) => (
-          <VirtualTableBody
-            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
-            deferredMeasurementCache={measurementCache}
-            rowHeight={measurementCache.rowHeight}
-            height={400}
-            overscanRowCount={2}
-            columnCount={1}
-            rows={rows}
-            rowCount={rows.length}
-            rowRenderer={rowRenderer}
-            width={width}
-            role="grid"
-          />
-        )}
-      </AutoSizer>
-    </div>
+          </Tbody>
+        </Table>
+        <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+          <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
+            <Caption>Virtualized table with composable table components</Caption>
+            <Thead>
+              <Tr>
+                <Th className="pf-v5-c-table__check" />
+                {columns.map((col, index) => (
+                  <Th key={++index}>{col}</Th>
+                ))}
+              </Tr>
+            </Thead>
+          </Table>
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <VirtualTableBody
+                className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
+                deferredMeasurementCache={measurementCache}
+                rowHeight={measurementCache.rowHeight}
+                height={400}
+                overscanRowCount={2}
+                columnCount={1}
+                rows={rows}
+                rowCount={rows.length}
+                rowRenderer={rowRenderer}
+                width={width}
+                role="grid"
+              />
+            )}
+          </AutoSizer>
+        </div>
+      </PanelMain>
+    </Panel>
   );
 };

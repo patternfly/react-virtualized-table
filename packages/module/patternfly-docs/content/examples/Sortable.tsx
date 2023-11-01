@@ -1,7 +1,6 @@
 import React from 'react';
-import { debounce } from '@patternfly/react-core';
-import { sortable, SortByDirection, TableGridBreakpoint } from '@patternfly/react-table';
-import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
+import { debounce, Panel, PanelHeader, PanelMain } from '@patternfly/react-core';
+import { sortable, SortByDirection, Table, Tbody, Td, Th, Thead, Tr } from '@patternfly/react-table';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';
 
@@ -60,22 +59,60 @@ export class SortableExample extends React.Component {
   _handleResize() {
     this.forceUpdate();
   }
+  // Index of the currently sorted column
+  // Note: if you intend to make columns reorderable, you may instead want to use a non-numeric key
+  // as the identifier of the sorted column. See the "Compound expandable" example.
+  const [activeSortIndex, setActiveSortIndex] = React.useState<number | null>(null);
 
-  onSort(_event, index, direction) {
-    const sortedRows = this.state.rows.sort((a, b) =>
-      // eslint-disable-next-line no-nested-ternary
-      a.cells[index] < b.cells[index] ? -1 : a.cells[index] > b.cells[index] ? 1 : 0
-    );
-    this.setState({
-      sortBy: {
-        index,
-        direction
-      },
-      rows: direction === SortByDirection.asc ? sortedRows : sortedRows.reverse()
+  // Sort direction of the currently sorted column
+  const [activeSortDirection, setActiveSortDirection] = React.useState<'asc' | 'desc' | null>(null);
+
+  // Sort dropdown expansion
+  // const [isSortDropdownOpen, setIsSortDropdownOpen] = React.useState(false);
+
+  // Since OnSort specifies sorted columns by index, we need sortable values for our object by column index.
+  // This example is trivial since our data objects just contain strings, but if the data was more complex
+  // this would be a place to return simplified string or number versions of each column to sort by.
+  const getSortableRowValues = (repo: Repository): (string | number)[] => {
+    const { name, branches, prs, workspaces, lastCommit } = repo;
+    return [name, branches, prs, workspaces, lastCommit];
+  };
+
+  // Note that we perform the sort as part of the component's render logic and not in onSort.
+  // We shouldn't store the list of data in state because we don't want to have to sync that with props.
+  let sortedRepositories = repositories;
+  if (activeSortIndex !== null) {
+    sortedRepositories = repositories.sort((a, b) => {
+      const aValue = getSortableRowValues(a)[activeSortIndex];
+      const bValue = getSortableRowValues(b)[activeSortIndex];
+      if (typeof aValue === 'number') {
+        // Numeric sort
+        if (activeSortDirection === 'asc') {
+          return (aValue as number) - (bValue as number);
+        }
+        return (bValue as number) - (aValue as number);
+      } else {
+        // String sort
+        if (activeSortDirection === 'asc') {
+          return (aValue as string).localeCompare(bValue as string);
+        }
+        return (bValue as string).localeCompare(aValue as string);
+      }
     });
-
-    this.sortableVirtualBody.forceUpdateVirtualGrid();
   }
+
+  const getSortParams = (columnIndex: number): ThProps['sort'] => ({
+    sortBy: {
+      index: activeSortIndex,
+      direction: activeSortDirection
+    },
+    onSort: (_event, index, direction) => {
+      setActiveSortIndex(index);
+      setActiveSortDirection(direction as 'desc' | 'asc');
+    },
+    columnIndex
+  });
+
 
   render() {
     const { sortBy, columns, rows } = this.state;
@@ -114,6 +151,31 @@ export class SortableExample extends React.Component {
 
     return (
       <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+      <Panel>
+      <PanelHeader>Sortable Virtualized Table</PanelHeader>
+      <PanelMain tabIndex={0}>
+        <Table isStickyHeader aria-label="Sortable Virtualized Table" aria-rowcount={rows.length} variant="compact">
+          <Thead>
+            <Tr>
+              <Th sort={this.onSort}>{columns[0]}</Th>
+              <Th sort={this.onSort}>{columns[1]}</Th>
+              <Th sort={this.onSort}>{columns[2]}</Th>
+              <Th sort={this.onSort}>{columns[3]}</Th>
+              <Th sort={this.onSort}>{columns[4]}</Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {rows.map((row) => (
+              <Tr key={row}>
+                <Td dataLabel={columns[0]}>{row[0]}</Td>
+                <Td dataLabel={columns[1]}>{row[1]}</Td>
+                <Td dataLabel={columns[2]}>{row[2]}</Td>
+                <Td dataLabel={columns[3]}>{row[3]}</Td>
+                <Td dataLabel={columns[4]}>{row[4]}</Td>
+              </Tr>
+            ))}
+          </Tbody>
+        </Table>
         <TableDeprecated
           caption="Sortable Virtualized Table"
           cells={columns}
@@ -145,6 +207,9 @@ export class SortableExample extends React.Component {
           )}
         </AutoSizer>
       </div>
+      </PanelMain>
+      </PanelHeader>
+      </Panel>
     );
   }
 }
