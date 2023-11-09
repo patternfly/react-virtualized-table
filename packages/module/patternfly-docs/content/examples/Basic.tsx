@@ -9,25 +9,7 @@ export const VirtualizedExample: React.FunctionComponent = () => {
     rows.push([`one-${i}`, `two-${i}`, `three-${i}`, `four-${i}`, `five-${i}`]);
   }
 
-  const columns = [
-    {
-      title: 'Repositories',
-      props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
-    },
-    {
-      title: 'Branches',
-      props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
-    },
-    {
-      title: 'Pull requests',
-      props: { className: 'pf-m-4-col-on-md pf-m-4-col-on-lg pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-md' }
-    },
-    {
-      title: 'Workspaces',
-      props: { className: 'pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg' }
-    },
-    { title: 'Last Commit', props: { className: 'pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-xl' } }
-  ];
+  const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
 
   const measurementCache = new CellMeasurerCache({
     fixedWidth: true,
@@ -52,7 +34,7 @@ export const VirtualizedExample: React.FunctionComponent = () => {
         <Thead>
           <Tr>
             {columns.map((col, index) => (
-              <Th key={++index}>{col.title}</Th>
+              <Th key={++index}>{col}</Th>
             ))}
           </Tr>
         </Thead>
