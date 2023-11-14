@@ -34,21 +34,21 @@ export class WindowScrollerExample extends React.Component {
       columns: [
         {
           title: 'Repositories',
-          props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
+          props: { className: 'pf-v5-c-table__th pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
         },
         {
           title: 'Branches',
-          props: { className: 'pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
+          props: { className: 'pf-v5-c-table__th pf-m-6-col-on-sm pf-m-4-col-on-md pf-m-3-col-on-lg pf-m-2-col-on-xl' }
         },
         {
           title: 'Pull requests',
-          props: { className: 'pf-m-4-col-on-md pf-m-4-col-on-lg pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-md' }
+          props: { className: 'pf-v5-c-table__th pf-m-4-col-on-md pf-m-4-col-on-lg pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-md' }
         },
         {
           title: 'Workspaces',
-          props: { className: 'pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg' }
+          props: { className: 'pf-v5-c-table__th pf-m-2-col-on-lg pf-m-2-col-on-xl pf-m-hidden pf-m-visible-on-lg' }
         },
-        { title: 'Last Commit', props: { className: 'pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-xl' } }
+        { title: 'Last Commit', props: { className: 'pf-v5-c-table__th pf-m-3-col-on-xl pf-m-hidden pf-m-visible-on-xl' } }
       ],
       rows
     };
@@ -86,7 +86,7 @@ export class WindowScrollerExample extends React.Component {
 
       return (
         <CellMeasurer cache={this._cellMeasurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-          <tr style={style} role="row">
+          <tr className="pf-v5-c-table__tr" style={style} role="row">
             <td className={columns[0].props.className} role="gridcell">
               {text}
             </td>
@@ -140,7 +140,7 @@ export class WindowScrollerExample extends React.Component {
                       <VirtualTableBody
                         ref={this._bindBodyRef}
                         autoHeight
-                        className={'pf-v5-c-virtualized pf-v5-c-window-scroller'}
+                        className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
                         deferredMeasurementCache={this._cellMeasurementCache}
                         rowHeight={this._cellMeasurementCache.rowHeight}
                         height={height || 0}
