@@ -89,7 +89,7 @@ export class SelectableExample extends React.Component {
 
       return (
         <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-          <tr data-id={index} style={style} role="row">
+          <tr className="pf-v5-c-table__tr" data-id={index} style={style} role="row">
             <td data-key="0" className="pf-v5-c-table__check" role="gridcell">
               <input
                 type="checkbox"

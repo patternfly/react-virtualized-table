@@ -91,7 +91,7 @@ export class SortableExample extends React.Component {
 
       return (
         <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-          <tr style={style} role="row">
+          <tr className="pf-v5-c-table__tr" style={style} role="row">
             <td className={columns[0].props.className} role="gridcell">
               {rows[index].cells[0]}
             </td>

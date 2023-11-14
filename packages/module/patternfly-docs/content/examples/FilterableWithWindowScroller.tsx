@@ -395,7 +395,7 @@ export class FilterExample extends React.Component {
 
       return (
         <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-          <tr data-id={index} style={style} role="row">
+          <tr className="pf-v5-c-table__tr" data-id={index} style={style} role="row">
             <td role="gridcell">{filteredRows[index].cells[0]}</td>
             <td role="gridcell">{filteredRows[index].cells[1]}</td>
             <td role="gridcell">{filteredRows[index].cells[2]}</td>
