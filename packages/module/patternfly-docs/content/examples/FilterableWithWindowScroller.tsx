@@ -1,479 +1,472 @@
-/* eslint-disable no-console */
 import React from 'react';
-import {
-  Button,
-  ButtonVariant,
-  Toolbar,
-  ToolbarItem,
-  ToolbarContent,
-  ToolbarFilter,
-  ToolbarToggleGroup,
-  ToolbarGroup,
-  InputGroup,
-  InputGroupItem,
-  TextInput
-} from '@patternfly/react-core';
-import { debounce } from '@patternfly/react-core';
-import SearchIcon from '@patternfly/react-icons/dist/esm/icons/search-icon';
-import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
-import { ActionsColumn } from '@patternfly/react-table';
-import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
-import {
-  Dropdown as DropdownDeprecated,
-  DropdownItem as DropdownItemDeprecated,
-  DropdownPosition as DropdownPositionDeprecated,
-  DropdownToggle as DropdownToggleDeprecated,
-  Select as SelectDeprecated,
-  SelectOption as SelectOptionDeprecated,
-  SelectVariant as SelectVariantDeprecated
-} from '@patternfly/react-core/deprecated';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint, ActionsColumn, Tbody } from '@patternfly/react-table';
+import {
+  SelectOption,
+  ToolbarItem,
+  Select,
+  MenuToggleElement,
+  MenuToggle,
+  ToolbarFilter,
+  SearchInput,
+  Badge,
+  Toolbar,
+  ToolbarContent,
+  ToolbarToggleGroup,
+  ToolbarGroup,
+  ToolbarChipGroup,
+  Button,
+  EmptyState,
+  EmptyStateActions,
+  EmptyStateBody,
+  EmptyStateFooter,
+  EmptyStateHeader,
+  EmptyStateIcon,
+  Bullseye
+} from '@patternfly/react-core';
+import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 
-export class FilterExample extends React.Component {
-  constructor(props) {
-    super(props);
+export const ComposableTableWindowScroller = () => {
+  const [scrollableElement, setScrollableElement] = React.useState();
+  React.useEffect(() => {
+    const scrollableElement = document.getElementById('content-scrollable-2');
+    setScrollableElement(scrollableElement);
+  });
 
-    this.actionsVirtualBody = null;
+  interface DataType {
+    cells: (string | number)[];
+    id: string;
+    disableActions: boolean;
+  }
 
-    const rows = [];
-    for (let i = 0; i < 100; i++) {
-      const data = {};
-      if (i % 2 === 0) {
-        data.cells = [`US-Node ${i}`, i, i, 'Down', 'Brno'];
-      } else if (i % 3 === 0) {
-        data.cells = [`CN-Node ${i}`, i, i, 'Running', 'Westford'];
-      } else {
-        data.cells = [`US-Node ${i}`, i, i, 'Stopped', 'Raleigh'];
-      }
-      rows.push(data);
+  const rows: DataType[] = [];
+  for (let i = 0; i < 100; i++) {
+    if (i % 2 === 0) {
+      rows.push({
+        disableActions: false,
+        id: `actions-row-${i}`,
+        cells: [`US-Node ${i}`, i, i, 'Down', 'Brno']
+      });
+    } else if (i % 3 === 0) {
+      rows.push({
+        disableActions: false,
+        id: `actions-row-${i}`,
+        cells: [`CN-Node ${i}`, i, i, 'Running', 'Westford']
+      });
+    } else {
+      rows.push({
+        disableActions: true,
+        id: `actions-row-${i}`,
+        cells: [`US-Node ${i}`, i, i, 'Stopped', 'Raleigh']
+      });
     }
-    this.scrollableElement = React.createRef();
-
-    this.state = {
-      scrollableElement: null,
-
-      filters: {
-        location: [],
-        name: [],
-        status: []
-      },
-      currentCategory: 'Name',
-      isFilterDropdownOpen: false,
-      isCategoryDropdownOpen: false,
-      nameInput: '',
-      columns: [
-        { title: 'Servers' },
-        { title: 'Threads' },
-        { title: 'Applications' },
-        { title: 'Status' },
-        { title: 'Location' }
-      ],
-      rows,
-      inputValue: '',
-      actions: [
-        {
-          title: 'Some action',
-          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Some action, on row: ', rowId)
-        },
-        {
-          title: <div>Another action</div>,
-          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Another action, on row: ', rowId)
-        },
-        {
-          isSeparator: true
-        },
-        {
-          title: 'Third action',
-          onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Third action, on row: ', rowId)
-        }
-      ]
-    };
-
-    this._handleResize = debounce(this._handleResize.bind(this), 100);
-
-    this.onDelete = (type = '', id = '') => {
-      if (type) {
-        this.setState((prevState) => {
-          prevState.filters[type.toLowerCase()] = prevState.filters[type.toLowerCase()].filter((s) => s !== id);
-          return {
-            filters: prevState.filters
-          };
-        });
-      } else {
-        this.setState({
-          filters: {
-            location: [],
-            name: [],
-            status: []
-          },
-          inputValue: ''
-        });
-      }
-    };
-
-    this.onCategoryToggle = (_event, isOpen) => {
-      this.setState({
-        isCategoryDropdownOpen: isOpen
-      });
-    };
-
-    this.onCategorySelect = (event) => {
-      this.setState({
-        currentCategory: event.target.innerText,
-        isCategoryDropdownOpen: !this.state.isCategoryDropdownOpen
-      });
-    };
-
-    this.onFilterToggle = (_event, isOpen) => {
-      this.setState({
-        isFilterDropdownOpen: isOpen
-      });
-    };
-
-    this.onFilterSelect = (_event) => {
-      this.setState({
-        isFilterDropdownOpen: !this.state.isFilterDropdownOpen
-      });
-    };
-
-    this.onInputChange = (_event, newValue) => {
-      // this.setState({ inputValue: newValue });
-      if (newValue === '') {
-        this.onDelete();
-        this.setState({
-          inputValue: newValue
-        });
-      } else {
-        this.setState((prevState) => ({
-            filters: {
-              ...prevState.filters,
-              ['name']: [newValue]
-            },
-            inputValue: newValue
-          }));
-      }
-    };
-
-    this.onRowSelect = (event, isSelected, rowId) => {
-      let rows;
-      if (rowId === -1) {
-        rows = this.state.rows.map((oneRow) => {
-          oneRow.selected = isSelected;
-          return oneRow;
-        });
-      } else {
-        rows = [...this.state.rows];
-        rows[rowId].selected = isSelected;
-      }
-      this.setState({
-        rows
-      });
-    };
-
-    this.onStatusSelect = (event, selection) => {
-      const checked = event.target.checked;
-      this.setState((prevState) => {
-        const prevSelections = prevState.filters.status;
-        return {
-          filters: {
-            ...prevState.filters,
-            status: checked ? [...prevSelections, selection] : prevSelections.filter((value) => value !== selection)
-          }
-        };
-      });
-    };
-
-    this.onNameInput = (event) => {
-      if (event.key && event.key !== 'Enter') {
-        return;
-      }
-
-      const { inputValue } = this.state;
-      this.setState((prevState) => {
-        const prevFilters = prevState.filters.name;
-        return {
-          filters: {
-            ...prevState.filters,
-            ['name']: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue]
-          },
-          inputValue: ''
-        };
-      });
-    };
-
-    this.onLocationSelect = (event, selection) => {
-      this.setState((prevState) => ({
-          filters: {
-            ...prevState.filters,
-            ['location']: [selection]
-          }
-        }));
-      this.onFilterSelect();
-    };
-
-    this._handleResize = debounce(this._handleResize.bind(this), 100);
-    this._bindBodyRef = this._bindBodyRef.bind(this);
   }
 
-  componentDidMount() {
-    // re-render after resize
-    window.addEventListener('resize', this._handleResize);
+  const actions = [
+    {
+      title: 'Some action',
+      onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Some action, on row: ', rowId)
+    },
+    {
+      title: <div>Another action</div>,
+      onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Another action, on row: ', rowId)
+    },
+    {
+      isSeparator: true
+    },
+    {
+      title: 'Third action',
+      onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Third action, on row: ', rowId)
+    }
+  ];
 
-    setTimeout(() => {
-      const scollableElement = document.getElementById('content-scrollable-1');
-      this.setState({ scollableElement });
+  const columns = ['Servers', 'Threads', 'Applications', 'Status', 'Location'];
+  const scrollToIndex = -1; // can be used to programmatically set current index
+
+  const [isCategoryDropdownOpen, setIsCategoryDropdownOpen] = React.useState(false);
+  const [isFilterDropdownOpen, setIsFilterDropdownOpen] = React.useState(false);
+  const [currentCategory, setCurrentCategory] = React.useState('Name');
+  const [filters, setFilters] = React.useState<Record<string, string[]>>({ location: [], name: [], status: [] });
+  const [inputValue, setInputValue] = React.useState('');
+
+  const onDelete = (type: string | ToolbarChipGroup, id: string) => {
+    if (type === 'Location') {
+      setFilters({
+        ...filters,
+        location: filters.location.filter((fil: string) => fil !== id)
+      });
+    } else if (type === 'Name') {
+      setFilters({
+        ...filters,
+        name: filters.name.filter((fil: string) => fil !== id)
+      });
+    } else if (type === 'Status') {
+      setFilters({
+        ...filters,
+        status: filters.status.filter((fil: string) => fil !== id)
+      });
+    } else {
+      setFilters({ location: [], name: [], status: [] });
+    }
+  };
+
+  const onCategoryToggle = () => {
+    setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+  };
+
+  const onCategorySelect = (event) => {
+    setCurrentCategory(event.target.innerText);
+    setIsCategoryDropdownOpen(!isCategoryDropdownOpen);
+  };
+
+  const onFilterToggle = () => {
+    setIsFilterDropdownOpen(!isFilterDropdownOpen);
+  };
+
+  const onInputChange = (newValue: string) => {
+    setInputValue(newValue);
+  };
+
+  const onStatusSelect = (event: React.MouseEvent<Element, MouseEvent>, selection: string) => {
+    const checked = (event.target as HTMLInputElement).checked;
+    setFilters({
+      ...filters,
+      status: checked ? [...filters.status, selection] : filters.status.filter((value) => value !== selection)
     });
+    setIsFilterDropdownOpen(false);
+  };
 
-    // re-render after resize
-    window.addEventListener('resize', this._handleResize);
-  }
+  const onNameInput = (event: React.KeyboardEvent) => {
+    setIsCategoryDropdownOpen(false);
+    if (event.key && event.key !== 'Enter') {
+      return;
+    }
 
-  componentWillUnmount() {
-    window.removeEventListener('resize', this._handleResize);
-  }
+    const prevFilters = filters.name;
+    setFilters({ ...filters, name: prevFilters.includes(inputValue) ? prevFilters : [...prevFilters, inputValue] });
+  };
 
-  _handleResize() {
-    this._cellMeasurementCache.clearAll();
-    this._bodyRef.recomputeVirtualGridSize();
-  }
+  const onFilterSelect = () => {
+    setIsFilterDropdownOpen(!isFilterDropdownOpen);
+    setIsCategoryDropdownOpen(false);
+  };
 
-  _bindBodyRef(ref) {
-    this._bodyRef = ref;
-  }
+  const onLocationSelect = (event: React.MouseEvent<Element, MouseEvent>, selection: string) => {
+    setFilters({ ...filters, location: [selection] });
 
-  buildCategoryDropdown() {
-    const { isCategoryDropdownOpen, currentCategory } = this.state;
+    setIsFilterDropdownOpen(false);
+    onFilterSelect();
+  };
+
+  const buildCategoryDropdown = () => {
+    const categoryMenuItems = [
+      <SelectOption key="cat1" value="Location">
+        Location
+      </SelectOption>,
+      <SelectOption key="cat2" value="Name">
+        Name
+      </SelectOption>,
+      <SelectOption key="cat3" value="Status">
+        Status
+      </SelectOption>
+    ];
 
     return (
       <ToolbarItem>
-        <DropdownDeprecated
-          onSelect={this.onCategorySelect}
-          position={DropdownPositionDeprecated.left}
-          toggle={
-            <DropdownToggleDeprecated onToggle={this.onCategoryToggle} style={{ width: '100%' }}>
-              <FilterIcon /> {currentCategory}
-            </DropdownToggleDeprecated>
-          }
+        <Select
+          onSelect={onCategorySelect}
+          selected={currentCategory}
+          toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+            <MenuToggle
+              ref={toggleRef}
+              onClick={onCategoryToggle}
+              isExpanded={isCategoryDropdownOpen}
+              icon={<FilterIcon />}
+              style={
+                {
+                  width: '100%',
+                  verticalAlign: 'text-bottom'
+                } as React.CSSProperties
+              }
+            >
+              {currentCategory}
+            </MenuToggle>
+          )}
           isOpen={isCategoryDropdownOpen}
-          dropdownItems={[
-            <DropdownItemDeprecated key="cat1">Location</DropdownItemDeprecated>,
-            <DropdownItemDeprecated key="cat2">Name</DropdownItemDeprecated>,
-            <DropdownItemDeprecated key="cat3">Status</DropdownItemDeprecated>
-          ]}
-          style={{ width: '100%' }}
-        ></DropdownDeprecated>
+        >
+          {categoryMenuItems}
+        </Select>
       </ToolbarItem>
     );
-  }
+  };
 
-  buildFilterDropdown() {
-    const { currentCategory, isFilterDropdownOpen, inputValue, filters } = this.state;
-
+  const buildFilterDropdown = () => {
     const locationMenuItems = [
-      <SelectOptionDeprecated key="raleigh" value="Raleigh" />,
-      <SelectOptionDeprecated key="westford" value="Westford" />,
-      <SelectOptionDeprecated key="boston" value="Boston" />,
-      <SelectOptionDeprecated key="brno" value="Brno" />,
-      <SelectOptionDeprecated key="bangalore" value="Bangalore" />
+      <SelectOption key="raleigh" value="Raleigh">
+        Raleigh
+      </SelectOption>,
+      <SelectOption key="westford" value="Westford">
+        Westford
+      </SelectOption>,
+      <SelectOption key="boston" value="Boston">
+        Boston
+      </SelectOption>,
+      <SelectOption key="brno" value="Brno">
+        Brno
+      </SelectOption>,
+      <SelectOption key="bangalore" value="Bangalore">
+        Bangalore
+      </SelectOption>
     ];
 
     const statusMenuItems = [
-      <SelectOptionDeprecated key="statusRunning" value="Running" />,
-      <SelectOptionDeprecated key="statusStopped" value="Stopped" />,
-      <SelectOptionDeprecated key="statusDown" value="Down" />,
-      <SelectOptionDeprecated key="statusDegraded" value="Degraded" />,
-      <SelectOptionDeprecated key="statusMaint" value="Needs Maintainence" />
+      <SelectOption hasCheckbox key="statusRunning" value="Running" isSelected={filters.status.includes('Running')}>
+        Running
+      </SelectOption>,
+      <SelectOption hasCheckbox key="statusStopped" value="Stopped" isSelected={filters.status.includes('Stopped')}>
+        Stopped
+      </SelectOption>,
+      <SelectOption hasCheckbox key="statusDown" value="Down" isSelected={filters.status.includes('Down')}>
+        Down
+      </SelectOption>,
+      <SelectOption hasCheckbox key="statusDegraded" value="Degraded" isSelected={filters.status.includes('Degraded')}>
+        Degraded
+      </SelectOption>,
+      <SelectOption
+        hasCheckbox
+        key="statusMaint"
+        value="Needs maintenance"
+        isSelected={filters.status.includes('Needs maintenance')}
+      >
+        Needs maintenance
+      </SelectOption>
     ];
 
     return (
       <React.Fragment>
         <ToolbarFilter
           chips={filters.location}
-          deleteChip={this.onDelete}
+          deleteChip={(category, chip) => onDelete(category, chip as string)}
           categoryName="Location"
           showToolbarItem={currentCategory === 'Location'}
         >
-          <SelectDeprecated
+          <Select
             aria-label="Location"
-            onToggle={this.onFilterToggle}
-            onSelect={this.onLocationSelect}
-            selections={filters.location[0]}
+            onSelect={onLocationSelect}
+            selected={filters.location[0]}
             isOpen={isFilterDropdownOpen}
-            placeholderText="Any"
+            popperProps={{ minWidth: '100px' }}
+            toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+              <MenuToggle
+                ref={toggleRef}
+                onClick={onFilterToggle}
+                isExpanded={isFilterDropdownOpen}
+                style={
+                  {
+                    width: '100%',
+                    verticalAlign: 'text-bottom'
+                  } as React.CSSProperties
+                }
+              >
+                {filters.location[0] || `Any`}
+              </MenuToggle>
+            )}
           >
             {locationMenuItems}
-          </SelectDeprecated>
+          </Select>
         </ToolbarFilter>
         <ToolbarFilter
           chips={filters.name}
-          deleteChip={this.onDelete}
+          deleteChip={(category, chip) => onDelete(category, chip as string)}
           categoryName="Name"
           showToolbarItem={currentCategory === 'Name'}
         >
-          <InputGroup>
-            <InputGroupItem isFill>
-              <TextInput
-                name="nameInput"
-                id="nameInput1"
-                type="search"
-                aria-label="name filter"
-                onChange={this.onInputChange}
-                value={inputValue}
-                placeholder="Filter by name..."
-                // onKeyDown={this.onNameInput}
-              />
-            </InputGroupItem>
-            <InputGroupItem>
-              <Button
-                variant={ButtonVariant.control}
-                aria-label="search button for search input"
-                // onClick={this.onNameInput}
-              >
-                <SearchIcon />
-              </Button>
-            </InputGroupItem>
-          </InputGroup>
+          <SearchInput
+            aria-label="name filter"
+            placeholder="Filter by name..."
+            onChange={(_event, value) => onInputChange(value)}
+            value={inputValue}
+            onClear={() => {
+              onInputChange('');
+            }}
+            onSearch={onNameInput}
+          />
         </ToolbarFilter>
         <ToolbarFilter
           chips={filters.status}
-          deleteChip={this.onDelete}
+          deleteChip={(category, chip) => onDelete(category, chip as string)}
           categoryName="Status"
           showToolbarItem={currentCategory === 'Status'}
         >
-          <SelectDeprecated
-            variant={SelectVariantDeprecated.checkbox}
+          <Select
             aria-label="Status"
-            onToggle={this.onFilterToggle}
-            onSelect={this.onStatusSelect}
-            selections={filters.status}
             isOpen={isFilterDropdownOpen}
-            placeholderText="Filter by status"
+            popperProps={{ minWidth: '100px' }}
+            onSelect={onStatusSelect}
+            selected={filters.status}
+            toggle={(toggleRef: React.Ref<MenuToggleElement>) => (
+              <MenuToggle
+                ref={toggleRef}
+                onClick={onFilterToggle}
+                isExpanded={isFilterDropdownOpen}
+                style={
+                  {
+                    width: '100%',
+                    verticalAlign: 'text-bottom'
+                  } as React.CSSProperties
+                }
+              >
+                Filter by status
+                {filters.status.length > 0 && <Badge isRead>{filters.status.length}</Badge>}
+              </MenuToggle>
+            )}
           >
             {statusMenuItems}
-          </SelectDeprecated>
+          </Select>
         </ToolbarFilter>
       </React.Fragment>
     );
-  }
+  };
 
-  renderToolbar() {
-    return (
-      <Toolbar id="toolbar-with-chip-groups" clearAllFilters={this.onDelete} collapseListedFiltersBreakpoint="xl">
-        <ToolbarContent>
-          <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
-            <ToolbarGroup variant="filter-group">
-              {this.buildCategoryDropdown()}
-              {this.buildFilterDropdown()}
-            </ToolbarGroup>
-          </ToolbarToggleGroup>
-        </ToolbarContent>
-      </Toolbar>
-    );
-  }
+  const renderToolbar = () => (
+    <Toolbar
+      id="toolbar-with-chip-groups"
+      clearAllFilters={() => setFilters({ location: [], name: [], status: [] })}
+      collapseListedFiltersBreakpoint="xl"
+    >
+      <ToolbarContent>
+        <ToolbarToggleGroup toggleIcon={<FilterIcon />} breakpoint="xl">
+          <ToolbarGroup variant="filter-group">
+            {buildCategoryDropdown()}
+            {buildFilterDropdown()}
+          </ToolbarGroup>
+        </ToolbarToggleGroup>
+      </ToolbarContent>
+    </Toolbar>
+  );
 
-  render() {
-    const { loading, rows, columns, actions, filters, scollableElement } = this.state;
+  const measurementCache = new CellMeasurerCache({
+    fixedWidth: true,
+    minHeight: 44,
+    keyMapper: (rowIndex) => rowIndex
+  });
 
-    const filteredRows =
-      filters.name.length > 0 || filters.location.length > 0 || filters.status.length > 0
-        ? rows.filter((row) => (
-              (filters.name.length === 0 ||
-                filters.name.some((name) => row.cells[0].toLowerCase().includes(name.toLowerCase()))) &&
-              (filters.location.length === 0 || filters.location.includes(row.cells[4])) &&
-              (filters.status.length === 0 || filters.status.includes(row.cells[3]))
-            ))
-        : rows;
-    const measurementCache = new CellMeasurerCache({
-      fixedWidth: true,
-      minHeight: 44,
-      keyMapper: (rowIndex) => rowIndex
-    });
+  const filteredRows =
+    filters.name.length > 0 || filters.location.length > 0 || filters.status.length > 0
+      ? rows.filter(
+          (row) =>
+            (filters.name.length === 0 ||
+              filters.name.some((name) => (row.cells[0] as string).toLowerCase().includes(name.toLowerCase()))) &&
+            (filters.location.length === 0 || filters.location.includes(row.cells[4] as string)) &&
+            (filters.status.length === 0 || filters.status.includes(row.cells[3] as string))
+        )
+      : rows;
 
-    const rowRenderer = ({ index, _isScrolling, key, style, parent }) => {
-      const { actions } = this.state;
+  const emptyState = (
+    <EmptyState variant="xs">
+      <EmptyStateHeader
+        titleText="Clear all filters and try again."
+        headingLevel="h5"
+        icon={<EmptyStateIcon icon={SearchIcon} />}
+      />
+      <EmptyStateBody>No results match the filter criteria. Clear all filters and try again.</EmptyStateBody>
+      <EmptyStateFooter>
+        <EmptyStateActions>
+          <Button
+            variant="link"
+            onClick={() => {
+              setFilters({ location: [], name: [], status: [] });
+            }}
+          >
+            Clear all filters
+          </Button>
+        </EmptyStateActions>
+      </EmptyStateFooter>
+    </EmptyState>
+  );
 
-      return (
-        <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={index}>
-          <tr data-id={index} style={style} role="row">
-            <td role="gridcell">{filteredRows[index].cells[0]}</td>
-            <td role="gridcell">{filteredRows[index].cells[1]}</td>
-            <td role="gridcell">{filteredRows[index].cells[2]}</td>
-            <td role="gridcell">{filteredRows[index].cells[3]}</td>
-            <td role="gridcell">{filteredRows[index].cells[4]}</td>
-            <td role="gridcell">
-              <ActionsColumn
-                items={actions}
-                rowData={rows[index]}
-                extraData={{ rowIndex: index }}
-                isDisabled={rows[index].disableActions}
-              />
-            </td>
-          </tr>
-        </CellMeasurer>
-      );
-    };
+  const rowRenderer = ({ index: rowIndex, _isScrolling, key, style, parent }) => (
+    <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={rowIndex}>
+      <Tr style={style}>
+        {columns.map((col, index) => (
+          <Td key={`${rowIndex}-${index}`}>{filteredRows[rowIndex].cells[index]}</Td>
+        ))}
+        <Td isActionCell>
+          <ActionsColumn
+            items={actions}
+            isDisabled={filteredRows[rowIndex].disableActions} // Also arbitrary for the example
+          />
+        </Td>
+      </Tr>
+    </CellMeasurer>
+  );
 
-    return (
-      <React.Fragment>
-        {this.renderToolbar()}
+  const scrollableContainerStyle = {
+    height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
+    overflowX: 'auto',
+    overflowY: 'scroll',
+    scrollBehavior: 'smooth',
+    WebkitOverflowScrolling: 'touch',
+    position: 'relative'
+  };
 
-        <div
-          id="content-scrollable-1"
-          aria-label="Scrollable Table"
-          className="pf-v5-c-scrollablegrid"
-          style={{
-            height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
-            overflowX: 'auto',
-            overflowY: 'scroll',
-            scrollBehavior: 'smooth',
-            WebkitOverflowScrolling: 'touch',
-            position: 'relative'
-          }}
-        >
-          <div style={{ padding: 15 }}>
-            {!loading && filteredRows.length > 0 && (
-              <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
-                <TableDeprecated
-                  cells={columns}
+  return (
+    <div
+      id="content-scrollable-2"
+      aria-label="Scrollable Table"
+      className="pf-v5-c-scrollablegrid"
+      style={scrollableContainerStyle}
+    >
+      {renderToolbar()}
+      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
+        <Thead>
+          <Tr>
+            {columns.map((col, index) => (
+              <Th key={index}>{col}</Th>
+            ))}
+            <Td isActionCell></Td>
+          </Tr>
+        </Thead>
+        {filteredRows.length === 0 && (
+          <Tbody>
+            <Tr>
+              <Td colSpan={8}>
+                <Bullseye>{emptyState}</Bullseye>
+              </Td>
+            </Tr>
+          </Tbody>
+        )}
+      </Table>
+      <WindowScroller scrollElement={scrollableElement}>
+        {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
+          <AutoSizer disableHeight>
+            {({ width }) => (
+              <div ref={registerChild}>
+                <VirtualTableBody
+                  autoHeight
+                  className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
+                  deferredMeasurementCache={measurementCache}
+                  rowHeight={measurementCache.rowHeight}
+                  height={height || 0}
+                  isScrolling={isScrolling}
+                  isScrollingOptOut={true}
+                  onScroll={onChildScroll}
+                  overscanRowCount={2}
+                  columnCount={1}
                   rows={filteredRows}
-                  actions={actions}
-                  aria-label="Filterable Table Demo"
-                  aria-rowcount={rows.length}
-                >
-                  <TableHeaderDeprecated />
-                </TableDeprecated>
-                <WindowScroller scrollElement={scollableElement}>
-                  {({ height, _isScrolling, registerChild, _onChildScroll, scrollTop }) => (
-                    <AutoSizer disableHeight>
-                      {({ width }) => (
-                        <div ref={registerChild}>
-                          <VirtualTableBody
-                            ref={(ref) => (this.actionsVirtualBody = ref)}
-                            autoHeight
-                            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
-                            deferredMeasurementCache={measurementCache}
-                            rowHeight={measurementCache.rowHeight}
-                            height={height || 0}
-                            overscanRowCount={10}
-                            columnCount={6}
-                            rows={filteredRows}
-                            rowCount={filteredRows.length}
-                            rowRenderer={rowRenderer}
-                            scrollTop={scrollTop}
-                            width={width}
-                            role="grid"
-                          />
-                        </div>
-                      )}
-                    </AutoSizer>
-                  )}
-                </WindowScroller>
+                  rowCount={filteredRows.length}
+                  rowRenderer={rowRenderer}
+                  scrollToIndex={scrollToIndex}
+                  scrollTop={scrollTop}
+                  width={width}
+                  role="grid"
+                />
               </div>
             )}
-          </div>
-        </div>
-      </React.Fragment>
-    );
-  }
-}
+          </AutoSizer>
+        )}
+      </WindowScroller>
+    </div>
+  );
+};

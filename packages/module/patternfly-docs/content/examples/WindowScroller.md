@@ -17,6 +17,7 @@ import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-v
 import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
 import './VirtualGrid.example.css';
 import './WindowScroller.example.css';
+import './VirtualGrid.example.css';
 
 ## Examples
 
