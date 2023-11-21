@@ -1,7 +1,7 @@
 import React from 'react';
 import { CellMeasurerCache, CellMeasurer } from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
-import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint, ActionsColumn, Tbody } from '@patternfly/react-table';
+import { Table, Thead, Tr, Th, Td, TableGridBreakpoint, ActionsColumn, Tbody } from '@patternfly/react-table';
 import {
   SelectOption,
   ToolbarItem,
