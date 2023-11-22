@@ -13,8 +13,8 @@ module.exports = {
   '/extensions/virtual-scroll-window-scroller/react': {
     id: "Virtual scroll window scroller",
     title: "Virtual scroll window scroller",
-    toc: [{"text":"Examples"},[{"text":"Window scroller"},{"text":"Using composable table components"}]],
-    examples: ["Window scroller","Using composable table components"],
+    toc: [{"text":"Examples"},[{"text":"Window scroller"}]],
+    examples: ["Window scroller"],
     section: "extensions",
     subsection: "",
     source: "react",

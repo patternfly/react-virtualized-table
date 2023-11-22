@@ -32,7 +32,7 @@ export const ComposableTableWindowScroller = () => {
   React.useEffect(() => {
     const scrollableElement = document.getElementById('content-scrollable-2');
     setScrollableElement(scrollableElement);
-  });
+  }, []);
 
   interface DataType {
     cells: (string | number)[];
@@ -66,10 +66,12 @@ export const ComposableTableWindowScroller = () => {
   const actions = [
     {
       title: 'Some action',
+      // eslint-disable-next-line no-console
       onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Some action, on row: ', rowId)
     },
     {
       title: <div>Another action</div>,
+      // eslint-disable-next-line no-console
       onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Another action, on row: ', rowId)
     },
     {
@@ -77,6 +79,7 @@ export const ComposableTableWindowScroller = () => {
     },
     {
       title: 'Third action',
+      // eslint-disable-next-line no-console
       onClick: (_event, rowId, _rowData, _extra) => console.log('clicked on Third action, on row: ', rowId)
     }
   ];
