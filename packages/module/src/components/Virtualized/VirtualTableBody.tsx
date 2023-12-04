@@ -35,7 +35,6 @@ interface VirtualTableBodyProps
     | 'aria-label'
     | 'aria-readonly'
     | 'tabIndex'
-    | 'role'
     | 'autoContainerWidth'
     | 'cellRenderer'
     | 'className'
