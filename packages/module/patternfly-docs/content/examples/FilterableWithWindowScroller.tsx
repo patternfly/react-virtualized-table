@@ -28,9 +28,9 @@ import {
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 
 export const ComposableTableWindowScroller = () => {
-  const [scrollableElement, setScrollableElement] = React.useState();
+  const [scrollableElement, setScrollableElement] = React.useState<HTMLElement>();
   React.useEffect(() => {
-    const scrollableElement = document.getElementById('content-scrollable-2');
+    const scrollableElement = document.getElementById('content-scrollable-2') as HTMLElement;
     setScrollableElement(scrollableElement);
   }, []);
 
@@ -131,18 +131,19 @@ export const ComposableTableWindowScroller = () => {
     setInputValue(newValue);
   };
 
-  const onStatusSelect = (event: React.MouseEvent<Element, MouseEvent>, selection: string) => {
-    const checked = (event.target as HTMLInputElement).checked;
+  const onStatusSelect = (event: React.MouseEvent<Element, MouseEvent> | undefined, selection: string | number | undefined) => {
+    const checked = (event?.target as HTMLInputElement).checked;
     setFilters({
       ...filters,
-      status: checked ? [...filters.status, selection] : filters.status.filter((value) => value !== selection)
+      status: (checked && selection) ? [...filters.status, `${selection}`] : filters.status.filter((value) => value !== selection)
     });
     setIsFilterDropdownOpen(false);
   };
 
-  const onNameInput = (event: React.KeyboardEvent) => {
+  const onNameInput = (event: React.SyntheticEvent<HTMLButtonElement> | React.KeyboardEvent) => {
     setIsCategoryDropdownOpen(false);
-    if (event.key && event.key !== 'Enter') {
+    const pressedKey = (event as React.KeyboardEvent).key;
+    if (pressedKey && pressedKey !== 'Enter') {
       return;
     }
 
@@ -155,8 +156,8 @@ export const ComposableTableWindowScroller = () => {
     setIsCategoryDropdownOpen(false);
   };
 
-  const onLocationSelect = (event: React.MouseEvent<Element, MouseEvent>, selection: string) => {
-    setFilters({ ...filters, location: [selection] });
+  const onLocationSelect = (_event: React.MouseEvent<Element, MouseEvent> | undefined, selection: string | number | undefined) => {
+    setFilters({ ...filters, location: [`${selection}`] });
 
     setIsFilterDropdownOpen(false);
     onFilterSelect();
@@ -293,7 +294,7 @@ export const ComposableTableWindowScroller = () => {
             onClear={() => {
               onInputChange('');
             }}
-            onSearch={onNameInput}
+            onSearch={onNameInput} // any typing is needed because of what I think is a bug in the SearchInput typing
           />
         </ToolbarFilter>
         <ToolbarFilter
@@ -405,7 +406,16 @@ export const ComposableTableWindowScroller = () => {
     </CellMeasurer>
   );
 
-  const scrollableContainerStyle = {
+  interface ScrollableContainerStyle {
+    height: number;
+    overflowX: 'auto';
+    overflowY: 'scroll';
+    scrollBehavior: 'smooth';
+    WebkitOverflowScrolling: 'touch';
+    position: 'relative';
+  }
+
+  const scrollableContainerStyle: ScrollableContainerStyle = {
     height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
     overflowX: 'auto',
     overflowY: 'scroll',
@@ -445,7 +455,7 @@ export const ComposableTableWindowScroller = () => {
         {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
           <AutoSizer disableHeight>
             {({ width }) => (
-              <div ref={registerChild}>
+              <div ref={registerChild as (element: HTMLDivElement | null) => void}>
                 <VirtualTableBody
                   autoHeight
                   className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
