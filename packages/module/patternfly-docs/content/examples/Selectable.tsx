@@ -5,7 +5,10 @@ import { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-exten
 import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 
 export const SelectableTableVirtualized: React.FunctionComponent = () => {
-  const rows = [];
+  // this StringArray type is just needed because something in our documentation framework crashes when it encounters
+  // a string[][] type
+  type StringArray = string[];
+  const rows: StringArray[] = [];
 
   for (let i = 0; i < 100; i++) {
     rows.push([`one-${i}`, `two-${i}`, `three-${i}`, `four-${i}`, `five-${i}`]);
