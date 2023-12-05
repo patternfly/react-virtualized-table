@@ -13,6 +13,7 @@ import FilterIcon from '@patternfly/react-icons/dist/esm/icons/filter-icon';
 import { CellMeasurerCache, CellMeasurer} from 'react-virtualized';
 import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-virtualized-extension';
 import { Table as TableDeprecated, TableHeader as TableHeaderDeprecated } from '@patternfly/react-table/deprecated';
+import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 import {
   Dropdown as DropdownDeprecated,
   DropdownItem as DropdownItemDeprecated,

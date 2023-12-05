@@ -8,7 +8,7 @@ import {
 	TableHeader as TableHeaderDeprecated
 } from '@patternfly/react-table/deprecated';
 import { VirtualTableBody } from './index';
-import { rows, columns, actions } from '@patternfly/react-table/src/test-helpers/data-sets';
+import { rows, columns, actions } from './testDataSets';
 import { CellMeasurerCache } from 'react-virtualized';
 
 const measurementCache = new CellMeasurerCache({
