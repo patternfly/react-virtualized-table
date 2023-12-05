@@ -4,14 +4,19 @@ import { AutoSizer, VirtualTableBody, WindowScroller } from '@patternfly/react-v
 import { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';
 
 export const WindowScrollerExample = () => {
-  const [scrollableElement, setScrollableElement] = React.useState();
+  const [scrollableElement, setScrollableElement] = React.useState<HTMLElement>();
   React.useEffect(() => {
-    const scrollableElement = document.getElementById('content-scrollable-2');
+    const scrollableElement = document.getElementById('content-scrollable-2') as HTMLElement;
     setScrollableElement(scrollableElement);
-  });
-  const rows = [];
+  }, []);
+  
+  // this StringArray type is just needed because something in our documentation framework crashes when it encounters
+  // a string[][] type
+  type StringArray = string[];
+  const rows: StringArray[] = [];
+
   for (let i = 0; i < 100000; i++) {
-    const cells = [];
+    const cells: string[] = [];
     const num = Math.floor(Math.random() * Math.floor(2)) + 1;
     for (let j = 0; j < 5; j++) {
       const cellValue = i.toString() + ' Arma virumque cano Troiae qui primus ab oris. '.repeat(num);
@@ -19,6 +24,7 @@ export const WindowScrollerExample = () => {
     }
     rows.push(cells);
   }
+
   const [selected, setSelected] = React.useState(rows.map((_row) => false));
   const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
   const scrollToIndex = -1; // can be used to programmatically set current index
@@ -55,7 +61,16 @@ export const WindowScrollerExample = () => {
     );
   };
 
-  const scrollableContainerStyle = {
+  interface ScrollableContainerStyle {
+    height: number;
+    overflowX: 'auto';
+    overflowY: 'scroll';
+    scrollBehavior: 'smooth';
+    WebkitOverflowScrolling: 'touch';
+    position: 'relative';
+  }
+
+  const scrollableContainerStyle: ScrollableContainerStyle = {
     height: 500 /* important note: the scrollable container should have some sort of fixed height, or it should be wrapped in container that is smaller than ReactVirtualized__VirtualGrid container and has overflow visible if using the Window Scroller. See WindowScroller.example.css */,
     overflowX: 'auto',
     overflowY: 'scroll',
@@ -86,7 +101,7 @@ export const WindowScrollerExample = () => {
         {({ height, isScrolling, registerChild, onChildScroll, scrollTop }) => (
           <AutoSizer disableHeight>
             {({ width }) => (
-              <div ref={registerChild}>
+              <div ref={registerChild as (element: HTMLDivElement | null) => void}>
                 <VirtualTableBody
                   autoHeight
                   className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
