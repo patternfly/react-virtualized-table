@@ -9,7 +9,7 @@ export const WindowScrollerExample = () => {
     const scrollableElement = document.getElementById('content-scrollable-2') as HTMLElement;
     setScrollableElement(scrollableElement);
   }, []);
-  
+
   // this StringArray type is just needed because something in our documentation framework crashes when it encounters
   // a string[][] type
   type StringArray = string[];
@@ -74,7 +74,10 @@ export const WindowScrollerExample = () => {
       style={scrollableContainerStyle}
     >
       <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
-        <Caption>Virtualized table with composable table components</Caption>
+        <Caption>
+          WindowScroller allows scrolling of a parent container or the window instead of tbody. It also can be used to
+          dynamically size the table to the size of the scroll element.
+        </Caption>
         <Thead>
           <Tr>
             {columns.map((col, index) => (
