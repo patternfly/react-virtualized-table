@@ -25,13 +25,8 @@ export const WindowScrollerExample = () => {
     rows.push(cells);
   }
 
-  const [selected, setSelected] = React.useState(rows.map((_row) => false));
   const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];
   const scrollToIndex = -1; // can be used to programmatically set current index
-
-  const onSelect = (event, isSelected, rowId) => {
-    setSelected(selected.map((sel, index) => (index === rowId ? isSelected : sel)));
-  };
 
   const measurementCache = new CellMeasurerCache({
     fixedWidth: true,
@@ -45,14 +40,6 @@ export const WindowScrollerExample = () => {
     return (
       <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={rowIndex}>
         <Tr style={style}>
-          <Td
-            key={`${rowIndex}_0`}
-            select={{
-              rowIndex,
-              onSelect,
-              isSelected: selected[rowIndex]
-            }}
-          />
           {columns.map((col, index) => (
             <Td key={`${rowIndex}-${++index}`}>{text}</Td>
           ))}
@@ -90,7 +77,6 @@ export const WindowScrollerExample = () => {
         <Caption>Virtualized table with composable table components</Caption>
         <Thead>
           <Tr>
-            <Th className="pf-v5-c-table__check" />
             {columns.map((col, index) => (
               <Th key={++index}>{col}</Th>
             ))}
