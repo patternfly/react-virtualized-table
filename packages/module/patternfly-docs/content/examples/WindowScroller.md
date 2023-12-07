@@ -22,10 +22,5 @@ import './WindowScroller.example.css';
 
 ### Window scroller
 
-```js file="./WindowScroller.tsx"
-```
-
-### Using composable table components
-
-```js file="UsingComposableTableComponentsDemo.tsx"
+```js file="WindowScroller.tsx"
 ```

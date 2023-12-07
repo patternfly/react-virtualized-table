@@ -2,8 +2,8 @@ module.exports = {
   '/extensions/virtual-scroll-table/react': {
     id: "Virtual scroll table",
     title: "Virtual scroll table",
-    toc: [{"text":"Examples"},[{"text":"Basic"},{"text":"Using composable table components"},{"text":"Sortable"},{"text":"Selectable"},{"text":"Actions"},{"text":"Filterable with WindowScroller"}]],
-    examples: ["Basic","Using composable table components","Sortable","Selectable","Actions","Filterable with WindowScroller"],
+    toc: [{"text":"Examples"},[{"text":"Basic"},{"text":"Sortable"},{"text":"Selectable"},{"text":"Actions"},{"text":"Filterable with WindowScroller"}]],
+    examples: ["Basic","Sortable","Selectable","Actions","Filterable with WindowScroller"],
     section: "extensions",
     subsection: "",
     source: "react",
@@ -13,8 +13,8 @@ module.exports = {
   '/extensions/virtual-scroll-window-scroller/react': {
     id: "Virtual scroll window scroller",
     title: "Virtual scroll window scroller",
-    toc: [{"text":"Examples"},[{"text":"Window scroller"},{"text":"Using composable table components"}]],
-    examples: ["Window scroller","Using composable table components"],
+    toc: [{"text":"Examples"},[{"text":"Window scroller"}]],
+    examples: ["Window scroller"],
     section: "extensions",
     subsection: "",
     source: "react",

@@ -175,7 +175,6 @@ const pageData = {
   ],
   "examples": [
     "Basic",
-    "Using composable table components",
     "Sortable",
     "Selectable",
     "Actions",
@@ -207,16 +206,10 @@ pageData.liveContext = {
   SelectOptionDeprecated,
   SelectVariantDeprecated
 };
-pageData.relativeImports = {
-  
-};
+pageData.relativeImports = "import 'content/examples/./VirtualGrid.example.css';"
 pageData.examples = {
   'Basic': props => 
     <Example {...pageData} {...props} {...{"code":"import React from 'react';\nimport { Caption, Table, TableGridBreakpoint, Td, Th, Thead, Tr } from '@patternfly/react-table';\nimport { CellMeasurerCache, CellMeasurer } from 'react-virtualized';\nimport { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';\n\nexport const VirtualizedExample: React.FunctionComponent = () => {\n  // this StringArray type is just needed because something in our documentation framework crashes when it encounters\n  // a string[][] type\n  type StringArray = string[];\n  const rows: StringArray[] = [];\n  for (let i = 0; i < 100; i++) {\n    rows.push([`one-${i}`, `two-${i}`, `three-${i}`, `four-${i}`, `five-${i}`]);\n  }\n\n  const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];\n\n  const measurementCache = new CellMeasurerCache({\n    fixedWidth: true,\n    minHeight: 44,\n    keyMapper: (rowIndex) => rowIndex\n  });\n\n  const rowRenderer = ({ index: rowIndex, _isScrolling, key, style, parent }) => (\n    <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={rowIndex}>\n      <Tr style={style}>\n        {columns.map((col, index) => (\n          <Td key={`${rowIndex}-${index + 1}`}>{rows[rowIndex][index]}</Td>\n        ))}\n      </Tr>\n    </CellMeasurer>\n  );\n\n  return (\n    <div aria-label=\"Scrollable Table\" className=\"pf-v5-c-scrollablegrid\">\n      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>\n        <Caption>Simple Table</Caption>\n        <Thead>\n          <Tr>\n            {columns.map((col, index) => (\n              <Th key={++index}>{col}</Th>\n            ))}\n          </Tr>\n        </Thead>\n      </Table>\n      <AutoSizer disableHeight>\n        {({ width }) => (\n          <VirtualTableBody\n            className=\"pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller\"\n            deferredMeasurementCache={measurementCache}\n            rowHeight={measurementCache.rowHeight}\n            height={400}\n            overscanRowCount={2}\n            columnCount={1}\n            rows={rows}\n            rowCount={rows.length}\n            rowRenderer={rowRenderer}\n            width={width}\n            role=\"grid\"\n          />\n        )}\n      </AutoSizer>\n    </div>\n  );\n};\n","title":"Basic","lang":"js"}}>
-      
-    </Example>,
-  'Using composable table components': props => 
-    <Example {...pageData} {...props} {...{"code":"import React from 'react';\n\nimport { CellMeasurerCache, CellMeasurer } from 'react-virtualized';\nimport { AutoSizer, VirtualTableBody } from '@patternfly/react-virtualized-extension';\nimport { Table, Thead, Tr, Th, Td, Caption, TableGridBreakpoint } from '@patternfly/react-table';\n\nexport const ComposableTableVirtualized = () => {\n  const rows = [];\n  for (let i = 0; i < 100; i++) {\n    rows.push([`one-${i}`, `two-${i}`, `three-${i}`, `four-${i}`, `five-${i}`]);\n  }\n  const [selected, setSelected] = React.useState(rows.map((_row) => false));\n  const columns = ['Repositories', 'Branches', 'Pull requests', 'Workspaces', 'Last Commit'];\n\n  const onSelect = (event, isSelected, rowId) => {\n    setSelected(selected.map((sel, index) => (index === rowId ? isSelected : sel)));\n  };\n\n  const measurementCache = new CellMeasurerCache({\n    fixedWidth: true,\n    minHeight: 44,\n    keyMapper: (rowIndex) => rowIndex\n  });\n\n  const rowRenderer = ({ index: rowIndex, _isScrolling, key, style, parent }) => (\n    <CellMeasurer cache={measurementCache} columnIndex={0} key={key} parent={parent} rowIndex={rowIndex}>\n      <Tr style={style}>\n        <Td\n          key={`${rowIndex}_0`}\n          select={{\n            rowIndex,\n            onSelect,\n            isSelected: selected[rowIndex]\n          }}\n        />\n        {columns.map((col, index) => (\n          <Td key={`${rowIndex}-${index + 1}`}>{rows[rowIndex][index]}</Td>\n        ))}\n      </Tr>\n    </CellMeasurer>\n  );\n\n  return (\n    <div aria-label=\"Scrollable Table\" className=\"pf-v5-c-scrollablegrid\">\n      <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>\n        <Caption>Virtualized table with composable table components</Caption>\n        <Thead>\n          <Tr>\n            <Th className=\"pf-v5-c-table__check\" />\n            {columns.map((col, index) => (\n              <Th key={++index}>{col}</Th>\n            ))}\n          </Tr>\n        </Thead>\n      </Table>\n      <AutoSizer disableHeight>\n        {({ width }) => (\n          <VirtualTableBody\n            className=\"pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller\"\n            deferredMeasurementCache={measurementCache}\n            rowHeight={measurementCache.rowHeight}\n            height={400}\n            overscanRowCount={2}\n            columnCount={1}\n            rows={rows}\n            rowCount={rows.length}\n            rowRenderer={rowRenderer}\n            width={width}\n            role=\"grid\"\n          />\n        )}\n      </AutoSizer>\n    </div>\n  );\n};\n","title":"Using composable table components","lang":"js"}}>
       
     </Example>,
   'Sortable': props => 
@@ -252,7 +245,6 @@ const Component = () => (
       {`Examples`}
     </AutoLinkHeader>
     {React.createElement(pageData.examples["Basic"])}
-    {React.createElement(pageData.examples["Using composable table components"])}
     {React.createElement(pageData.examples["Sortable"])}
     {React.createElement(pageData.examples["Selectable"])}
     {React.createElement(pageData.examples["Actions"])}
