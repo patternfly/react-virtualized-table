@@ -1006,7 +1006,7 @@ export class VirtualGrid extends React.Component<VirtualGridProps, VirtualGridSt
     let innerScrollContainer = null;
     if (childrenToDisplay.length > 0) {
       const innerScrollContainerProps = {
-        className: 'ReactVirtualized__VirtualGrid__innerScrollContainer pf-v5-c-table__tbody',
+        className: 'ReactVirtualized__VirtualGrid__innerScrollContainer pf-v6-c-table__tbody',
         key: 'ReactVirtualized__VirtualGrid__innerScrollContainer',
         role: containerRole,
         style: {
