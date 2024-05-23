@@ -4,47 +4,47 @@ exports[`Actions virtualized table 1`] = `
 <DocumentFragment>
   <table
     aria-label="Aria labeled"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-10"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-5"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <th
           aria-sort="none"
-          class="pf-v5-c-table__th pf-v5-c-table__sort"
+          class="pf-v6-c-table__th pf-v6-c-table__sort"
           data-key="0"
           data-label="Header cell"
           scope="col"
           tabindex="-1"
         >
           <button
-            class="pf-v5-c-table__button"
+            class="pf-v6-c-table__button"
             type="button"
           >
             <div
-              class="pf-v5-c-table__button-content"
+              class="pf-v6-c-table__button-content"
             >
               <span
-                class="pf-v5-c-table__text"
+                class="pf-v6-c-table__text"
               >
                 Header cell
               </span>
               <span
-                class="pf-v5-c-table__sort-indicator"
+                class="pf-v6-c-table__sort-indicator"
               >
                 <svg
                   aria-hidden="true"
-                  class="pf-v5-svg"
+                  class="pf-v6-svg"
                   fill="currentColor"
                   height="1em"
                   role="img"
@@ -60,7 +60,7 @@ exports[`Actions virtualized table 1`] = `
           </button>
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="1"
           data-label="Branches"
           scope="col"
@@ -69,7 +69,7 @@ exports[`Actions virtualized table 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Pull requests"
           scope="col"
@@ -78,7 +78,7 @@ exports[`Actions virtualized table 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Workspaces"
           scope="col"
@@ -87,7 +87,7 @@ exports[`Actions virtualized table 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Last Commit"
           scope="col"
@@ -96,7 +96,7 @@ exports[`Actions virtualized table 1`] = `
           Last Commit
         </th>
         <td
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="5"
           data-label=""
           tabindex="-1"
@@ -111,23 +111,23 @@ exports[`Selectable virtualized table 1`] = `
 <DocumentFragment>
   <table
     aria-label="Aria labeled"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-12"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-6"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <td
-          class="pf-v5-c-table__th pf-v5-c-table__check"
+          class="pf-v6-c-table__th pf-v6-c-table__check"
           data-key="0"
           data-label=""
           tabindex="-1"
@@ -142,30 +142,30 @@ exports[`Selectable virtualized table 1`] = `
         </td>
         <th
           aria-sort="none"
-          class="pf-v5-c-table__th pf-v5-c-table__sort"
+          class="pf-v6-c-table__th pf-v6-c-table__sort"
           data-key="1"
           data-label="Header cell"
           scope="col"
           tabindex="-1"
         >
           <button
-            class="pf-v5-c-table__button"
+            class="pf-v6-c-table__button"
             type="button"
           >
             <div
-              class="pf-v5-c-table__button-content"
+              class="pf-v6-c-table__button-content"
             >
               <span
-                class="pf-v5-c-table__text"
+                class="pf-v6-c-table__text"
               >
                 Header cell
               </span>
               <span
-                class="pf-v5-c-table__sort-indicator"
+                class="pf-v6-c-table__sort-indicator"
               >
                 <svg
                   aria-hidden="true"
-                  class="pf-v5-svg"
+                  class="pf-v6-svg"
                   fill="currentColor"
                   height="1em"
                   role="img"
@@ -181,7 +181,7 @@ exports[`Selectable virtualized table 1`] = `
           </button>
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Branches"
           scope="col"
@@ -190,7 +190,7 @@ exports[`Selectable virtualized table 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Pull requests"
           scope="col"
@@ -199,7 +199,7 @@ exports[`Selectable virtualized table 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Workspaces"
           scope="col"
@@ -208,7 +208,7 @@ exports[`Selectable virtualized table 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="5"
           data-label="Last Commit"
           scope="col"
@@ -226,47 +226,47 @@ exports[`Simple Actions table 1`] = `
 <DocumentFragment>
   <table
     aria-label="Aria labeled"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-8"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-4"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <th
           aria-sort="none"
-          class="pf-v5-c-table__th pf-v5-c-table__sort"
+          class="pf-v6-c-table__th pf-v6-c-table__sort"
           data-key="0"
           data-label="Header cell"
           scope="col"
           tabindex="-1"
         >
           <button
-            class="pf-v5-c-table__button"
+            class="pf-v6-c-table__button"
             type="button"
           >
             <div
-              class="pf-v5-c-table__button-content"
+              class="pf-v6-c-table__button-content"
             >
               <span
-                class="pf-v5-c-table__text"
+                class="pf-v6-c-table__text"
               >
                 Header cell
               </span>
               <span
-                class="pf-v5-c-table__sort-indicator"
+                class="pf-v6-c-table__sort-indicator"
               >
                 <svg
                   aria-hidden="true"
-                  class="pf-v5-svg"
+                  class="pf-v6-svg"
                   fill="currentColor"
                   height="1em"
                   role="img"
@@ -282,7 +282,7 @@ exports[`Simple Actions table 1`] = `
           </button>
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="1"
           data-label="Branches"
           scope="col"
@@ -291,7 +291,7 @@ exports[`Simple Actions table 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Pull requests"
           scope="col"
@@ -300,7 +300,7 @@ exports[`Simple Actions table 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Workspaces"
           scope="col"
@@ -309,7 +309,7 @@ exports[`Simple Actions table 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Last Commit"
           scope="col"
@@ -318,7 +318,7 @@ exports[`Simple Actions table 1`] = `
           Last Commit
         </th>
         <td
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="5"
           data-label=""
           tabindex="-1"
@@ -333,23 +333,23 @@ exports[`Simple virtualized table aria-label 1`] = `
 <DocumentFragment>
   <table
     aria-label="Virtual Table Test"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-4"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-2"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="0"
           data-label="Header cell"
           scope="col"
@@ -358,7 +358,7 @@ exports[`Simple virtualized table aria-label 1`] = `
           Header cell
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="1"
           data-label="Branches"
           scope="col"
@@ -367,7 +367,7 @@ exports[`Simple virtualized table aria-label 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Pull requests"
           scope="col"
@@ -376,7 +376,7 @@ exports[`Simple virtualized table aria-label 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Workspaces"
           scope="col"
@@ -385,7 +385,7 @@ exports[`Simple virtualized table aria-label 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Last Commit"
           scope="col"
@@ -403,23 +403,23 @@ exports[`Simple virtualized table className 1`] = `
 <DocumentFragment>
   <table
     aria-label="Virtual Table Test"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-2"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-1"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="0"
           data-label="Header cell"
           scope="col"
@@ -428,7 +428,7 @@ exports[`Simple virtualized table className 1`] = `
           Header cell
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="1"
           data-label="Branches"
           scope="col"
@@ -437,7 +437,7 @@ exports[`Simple virtualized table className 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Pull requests"
           scope="col"
@@ -446,7 +446,7 @@ exports[`Simple virtualized table className 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Workspaces"
           scope="col"
@@ -455,7 +455,7 @@ exports[`Simple virtualized table className 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Last Commit"
           scope="col"
@@ -473,47 +473,47 @@ exports[`Sortable Virtualized Table 1`] = `
 <DocumentFragment>
   <table
     aria-label="Aria labeled"
-    class="pf-v5-c-table pf-m-grid-md"
+    class="pf-v6-c-table pf-m-grid-md"
     data-ouia-component-id="OUIA-Generated-Table-6"
-    data-ouia-component-type="PF5/Table"
+    data-ouia-component-type="PF6/Table"
     data-ouia-safe="true"
     role="grid"
   >
     <thead
-      class="pf-v5-c-table__thead"
+      class="pf-v6-c-table__thead"
     >
       <tr
-        class="pf-v5-c-table__tr"
+        class="pf-v6-c-table__tr"
         data-ouia-component-id="OUIA-Generated-TableRow-3"
-        data-ouia-component-type="PF5/TableRow"
+        data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
         <th
           aria-sort="none"
-          class="pf-v5-c-table__th pf-v5-c-table__sort"
+          class="pf-v6-c-table__th pf-v6-c-table__sort"
           data-key="0"
           data-label="Header cell"
           scope="col"
           tabindex="-1"
         >
           <button
-            class="pf-v5-c-table__button"
+            class="pf-v6-c-table__button"
             type="button"
           >
             <div
-              class="pf-v5-c-table__button-content"
+              class="pf-v6-c-table__button-content"
             >
               <span
-                class="pf-v5-c-table__text"
+                class="pf-v6-c-table__text"
               >
                 Header cell
               </span>
               <span
-                class="pf-v5-c-table__sort-indicator"
+                class="pf-v6-c-table__sort-indicator"
               >
                 <svg
                   aria-hidden="true"
-                  class="pf-v5-svg"
+                  class="pf-v6-svg"
                   fill="currentColor"
                   height="1em"
                   role="img"
@@ -529,7 +529,7 @@ exports[`Sortable Virtualized Table 1`] = `
           </button>
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="1"
           data-label="Branches"
           scope="col"
@@ -538,7 +538,7 @@ exports[`Sortable Virtualized Table 1`] = `
           Branches
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="2"
           data-label="Pull requests"
           scope="col"
@@ -547,7 +547,7 @@ exports[`Sortable Virtualized Table 1`] = `
           Pull requests
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="3"
           data-label="Workspaces"
           scope="col"
@@ -556,7 +556,7 @@ exports[`Sortable Virtualized Table 1`] = `
           Workspaces
         </th>
         <th
-          class="pf-v5-c-table__th"
+          class="pf-v6-c-table__th"
           data-key="4"
           data-label="Last Commit"
           scope="col"
