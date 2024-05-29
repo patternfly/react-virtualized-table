@@ -1,38 +1,38 @@
-.pf-v5-c-scrollablegrid .pf-v5-c-table {
+.pf-v6-c-scrollablegrid .pf-v6-c-table {
   table-layout: fixed;
 }
 
-.pf-v5-c-table.pf-v5-c-virtualized tr {
+.pf-v6-c-table.pf-v6-c-virtualized tr {
   display: table;
   table-layout: fixed;
   width: 100%;
 }
 
-.pf-v5-c-scrollablegrid .pf-v5-c-table tr > * {
+.pf-v6-c-scrollablegrid .pf-v6-c-table tr > * {
   height: auto;
 }
 
-.pf-v5-c-scrollablegrid .pf-v5-c-table tbody > tr > :first-child::before {
+.pf-v6-c-scrollablegrid .pf-v6-c-table tbody > tr > :first-child::before {
   content: none;
   width: 0 !important;
 }
 
-.pf-v5-c-scrollablegrid .pf-v5-c-table .pf-v5-c-table__check {
+.pf-v6-c-scrollablegrid .pf-v6-c-table .pf-v6-c-table__check {
   width: 8.333% !important;
 }
 
 @media screen and (max-width: 768px) {
-  .pf-v5-c-scrollablegrid .pf-v5-c-table .pf-v5-c-table__check {
+  .pf-v6-c-scrollablegrid .pf-v6-c-table .pf-v6-c-table__check {
     width: 16.66% !important;
   }
 }
 
-.pf-v5-c-scrollablegrid .pf-v5-c-table .pf-v5-c-table__action {
+.pf-v6-c-scrollablegrid .pf-v6-c-table .pf-v6-c-table__action {
   width: 5% !important;
   padding-left: 0px !important;
 }
 @media screen and (max-width: 992px) {
-  .pf-v5-c-scrollablegrid .pf-v5-c-table .pf-v5-c-table__action {
+  .pf-v6-c-scrollablegrid .pf-v6-c-table .pf-v6-c-table__action {
     width: 10% !important;
   }
 }

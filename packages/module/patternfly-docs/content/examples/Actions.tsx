@@ -70,7 +70,7 @@ export const ActionsExample: React.FunctionComponent = () => {
   );
 
   return (
-    <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+    <div aria-label="Scrollable Table" className="pf-v6-c-scrollablegrid">
       <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length} variant="compact">
         <Caption>Actions VirtualizedTable</Caption>
         <Thead>
@@ -87,7 +87,7 @@ export const ActionsExample: React.FunctionComponent = () => {
       <AutoSizer disableHeight>
         {({ width }) => (
           <VirtualTableBody
-            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
+            className="pf-v6-c-table pf-v6-c-virtualized pf-v6-c-window-scroller"
             deferredMeasurementCache={measurementCache}
             rowHeight={measurementCache.rowHeight}
             height={400}

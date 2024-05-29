@@ -70,7 +70,7 @@ export const WindowScrollerExample = () => {
     <div
       id="content-scrollable-2"
       aria-label="Scrollable Table"
-      className="pf-v5-c-scrollablegrid"
+      className="pf-v6-c-scrollablegrid"
       style={scrollableContainerStyle}
     >
       <Table gridBreakPoint={TableGridBreakpoint.none} aria-rowcount={rows.length}>
@@ -93,7 +93,7 @@ export const WindowScrollerExample = () => {
               <div ref={registerChild as (element: HTMLDivElement | null) => void}>
                 <VirtualTableBody
                   autoHeight
-                  className={'pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller'}
+                  className={'pf-v6-c-table pf-v6-c-virtualized pf-v6-c-window-scroller'}
                   deferredMeasurementCache={measurementCache}
                   rowHeight={measurementCache.rowHeight}
                   height={height || 0}
