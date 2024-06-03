@@ -126,10 +126,11 @@ exports[`Selectable virtualized table 1`] = `
         data-ouia-component-type="PF6/TableRow"
         data-ouia-safe="true"
       >
-        <td
+        <th
           class="pf-v6-c-table__th pf-v6-c-table__check"
           data-key="0"
           data-label=""
+          scope=""
           tabindex="-1"
         >
           <label>
@@ -139,7 +140,7 @@ exports[`Selectable virtualized table 1`] = `
               type="checkbox"
             />
           </label>
-        </td>
+        </th>
         <th
           aria-sort="none"
           class="pf-v6-c-table__th pf-v6-c-table__sort"

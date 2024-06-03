@@ -65,7 +65,7 @@ export const SortableExample: React.FunctionComponent = () => {
     </CellMeasurer>
   );
   return (
-    <div aria-label="Scrollable Table" className="pf-v5-c-scrollablegrid">
+    <div aria-label="Scrollable Table" className="pf-v6-c-scrollablegrid">
       <Table aria-label="Sortable table" ouiaId="SortableTable">
         <Caption>Sortable Virtualized Table</Caption>
         <Thead>
@@ -82,7 +82,7 @@ export const SortableExample: React.FunctionComponent = () => {
         {({ width }) => (
           <VirtualTableBody
             ref={(ref) => ref}
-            className="pf-v5-c-table pf-v5-c-virtualized pf-v5-c-window-scroller"
+            className="pf-v6-c-table pf-v6-c-virtualized pf-v6-c-window-scroller"
             deferredMeasurementCache={measurementCache}
             rowHeight={measurementCache.rowHeight}
             height={400}

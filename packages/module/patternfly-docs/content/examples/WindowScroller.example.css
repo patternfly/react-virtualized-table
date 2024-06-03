@@ -1,7 +1,7 @@
-.pf-v5-c-window-scroller .ReactVirtualized__VirtualGrid {
+.pf-v6-c-window-scroller .ReactVirtualized__VirtualGrid {
   overflow: visible !important;
 }
 
-.pf-v5-c-window-scroller .ReactVirtualized__VirtualGrid__innerScrollContainer {
+.pf-v6-c-window-scroller .ReactVirtualized__VirtualGrid__innerScrollContainer {
   overflow: visible !important;
 }
