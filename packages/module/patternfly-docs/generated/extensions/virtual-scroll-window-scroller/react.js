@@ -204,7 +204,7 @@ This package is currently an extension. Extension components do not undergo the 
 `}
             <br/>
     </p>
-    <AutoLinkHeader {...{"id":"examples","size":"h2","className":"ws-title ws-h2"}}>
+    <AutoLinkHeader {...{"id":"examples","headingLevel":"h2","className":"ws-title ws-h2"}}>
       {`Examples`}
     </AutoLinkHeader>
     {React.createElement(pageData.examples["Window scroller"])}
