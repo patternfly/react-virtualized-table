@@ -15,15 +15,15 @@ import {
   ToolbarContent,
   ToolbarToggleGroup,
   ToolbarGroup,
-  ToolbarChipGroup,
+  ToolbarLabelGroup,
   Button,
   EmptyState,
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-  EmptyStateHeader,
-  EmptyStateIcon,
-  Bullseye
+
+  Bullseye,
+  EmptyStateVariant
 } from '@patternfly/react-core';
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 
@@ -93,7 +93,7 @@ export const ComposableTableWindowScroller = () => {
   const [filters, setFilters] = React.useState<Record<string, string[]>>({ location: [], name: [], status: [] });
   const [inputValue, setInputValue] = React.useState('');
 
-  const onDelete = (type: string | ToolbarChipGroup, id: string) => {
+  const onDelete = (type: string | ToolbarLabelGroup, id: string) => {
     if (type === 'Location') {
       setFilters({
         ...filters,
@@ -219,7 +219,7 @@ export const ComposableTableWindowScroller = () => {
       <SelectOption key="brno" value="Brno">
         Brno
       </SelectOption>,
-      <SelectOption key="bangalore" value="Bangalore">
+      <SelectOption key="bEmptyStateHeadangalore" value="Bangalore">
         Bangalore
       </SelectOption>
     ];
@@ -250,8 +250,8 @@ export const ComposableTableWindowScroller = () => {
     return (
       <React.Fragment>
         <ToolbarFilter
-          chips={filters.location}
-          deleteChip={(category, chip) => onDelete(category, chip as string)}
+          labels={filters.location}
+          deleteLabel={(category, chip) => onDelete(category, chip as string)}
           categoryName="Location"
           showToolbarItem={currentCategory === 'Location'}
         >
@@ -281,8 +281,8 @@ export const ComposableTableWindowScroller = () => {
           </Select>
         </ToolbarFilter>
         <ToolbarFilter
-          chips={filters.name}
-          deleteChip={(category, chip) => onDelete(category, chip as string)}
+          labels={filters.name}
+          deleteLabel={(category, chip) => onDelete(category, chip as string)}
           categoryName="Name"
           showToolbarItem={currentCategory === 'Name'}
         >
@@ -298,8 +298,8 @@ export const ComposableTableWindowScroller = () => {
           />
         </ToolbarFilter>
         <ToolbarFilter
-          chips={filters.status}
-          deleteChip={(category, chip) => onDelete(category, chip as string)}
+          labels={filters.status}
+          deleteLabel={(category, chip) => onDelete(category, chip as string)}
           categoryName="Status"
           showToolbarItem={currentCategory === 'Status'}
         >
@@ -368,12 +368,10 @@ export const ComposableTableWindowScroller = () => {
       : rows;
 
   const emptyState = (
-    <EmptyState variant="xs">
-      <EmptyStateHeader
+    <EmptyState variant={EmptyStateVariant.xs}
         titleText="Clear all filters and try again."
         headingLevel="h5"
-        icon={<EmptyStateIcon icon={SearchIcon} />}
-      />
+        icon={SearchIcon}>
       <EmptyStateBody>No results match the filter criteria. Clear all filters and try again.</EmptyStateBody>
       <EmptyStateFooter>
         <EmptyStateActions>
