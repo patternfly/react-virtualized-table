@@ -1,4 +1,4 @@
-# React virtualized extension v5
+# React virtualized extension v6
 
 This package contains virtualization extensions for tables and lists.
 
