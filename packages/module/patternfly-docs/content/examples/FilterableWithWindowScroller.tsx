@@ -21,9 +21,8 @@ import {
   EmptyStateActions,
   EmptyStateBody,
   EmptyStateFooter,
-
-  Bullseye,
-  EmptyStateVariant
+  EmptyStateVariant,
+  Bullseye
 } from '@patternfly/react-core';
 import { FilterIcon, SearchIcon } from '@patternfly/react-icons';
 
