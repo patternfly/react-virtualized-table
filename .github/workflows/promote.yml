@@ -3,7 +3,7 @@ on:
   push:
     # Sequence of patterns matched against refs/tags
     tags:        
-      - v5.*
+      - v6.*
 jobs:
   build-and-promote:
     runs-on: ubuntu-latest
@@ -17,7 +17,7 @@ jobs:
         run: yarn install --frozen-lockfile && yarn build
       - uses: actions/setup-node@v3
         with:
-          node-version: '16.x'
+          node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
       - name: GitHub Tag Name example
         run: |
