@@ -2820,12 +2820,12 @@
     react-dropzone "^14.2.3"
     tslib "^2.7.0"
 
-"@patternfly/react-icons@6.0.0-prerelease.7", "@patternfly/react-icons@^6.0.0-prerelease.4", "@patternfly/react-icons@^6.0.0-prerelease.7":
+"@patternfly/react-icons@6.0.0-prerelease.7", "@patternfly/react-icons@^6.0.0-prerelease.7":
   version "6.0.0-prerelease.7"
   resolved "https://registry.yarnpkg.com/@patternfly/react-icons/-/react-icons-6.0.0-prerelease.7.tgz#44218ac52e5a8440bd0bb96eceef3df4c9239b86"
   integrity sha512-DQmecVgXRIiD3ww4KUuJ0qO76TmYMDEJ1ao1+DYuTSP+FzeJLJKuE9QxvL8qn3anyKtuORBuHdTIjM52mVq5Vg==
 
-"@patternfly/react-styles@6.0.0-prerelease.6", "@patternfly/react-styles@^6.0.0-prerelease.3", "@patternfly/react-styles@^6.0.0-prerelease.6":
+"@patternfly/react-styles@6.0.0-prerelease.6", "@patternfly/react-styles@^6.0.0-prerelease.6":
   version "6.0.0-prerelease.6"
   resolved "https://registry.yarnpkg.com/@patternfly/react-styles/-/react-styles-6.0.0-prerelease.6.tgz#e46acc02c8bc2464846544ebf55bbc4a646824b9"
   integrity sha512-tI28gIJFgbgVQs7Xj705csfl6T92dr5Bh7ynR5gN4+QdTWCUWmSctp46G2ZewXdrIN+C+2zUPE86o77aFp4CWw==
