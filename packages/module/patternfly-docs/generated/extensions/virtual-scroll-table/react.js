@@ -217,7 +217,7 @@ pageData.examples = {
 
 const Component = () => (
   <React.Fragment>
-    <p {...{"className":"pf-v6-c-content--p ws-p "}}>
+    <p {...{"className":"pf-v6-c-content--p pf-m-editorial ws-p "}}>
       {`Note: React Virtualized Extension lives in its own package at `}
       <PatternflyThemeLink {...{"to":"https://www.npmjs.com/package/@patternfly/react-virtualized-extension","className":""}}>
         <code {...{"className":"ws-code "}}>
