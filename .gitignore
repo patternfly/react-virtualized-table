@@ -32,3 +32,5 @@ lerna-debug.log
 *.swp
 
 public
+
+package-lock.json
